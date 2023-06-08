@@ -1,5 +1,5 @@
-# dunedaqdal
-This package contains a putative 'core' schema for dunedaq OKS configuartion.
+# coredal
+This package contains a putative 'core' schema for dunedaq OKS configuration.
 
   ![schema](schema.png)
 
@@ -20,8 +20,8 @@ The Application class has attibutes defining the application's
  `application_name` (executable name) and `commandline_parameters`. It's
  `applicationEnvironment` relationship lists environment variables needed by the
  application in addition to those defined by the Session. An
- [example Python script](https://github.com/gcrone/dunedaqdal/blob/gcrone/Resource/scripts/app_environment.py)
- that prints out the environmanet for enabled applications in the
+ [example Python script](https://github.com/DUNE-DAQ/coredal/blob/develop/scripts/app_environment.py)
+ that prints out the environment for enabled applications in the
  Session is provided in the `scripts` directory.
 
 
