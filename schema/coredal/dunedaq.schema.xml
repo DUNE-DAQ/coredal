@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="ASCII"?>
+
+<!-- oks-schema version 2.2 -->
+
+
+<!DOCTYPE oks-schema [
+  <!ELEMENT oks-schema (info, (include)?, (comments)?, (class)+)>
+  <!ELEMENT info EMPTY>
+  <!ATTLIST info
+      name CDATA #IMPLIED
+      type CDATA #IMPLIED
+      num-of-items CDATA #REQUIRED
+      oks-format CDATA #FIXED "schema"
+      oks-version CDATA #REQUIRED
+      created-by CDATA #IMPLIED
+      created-on CDATA #IMPLIED
+      creation-time CDATA #IMPLIED
+      last-modified-by CDATA #IMPLIED
+      last-modified-on CDATA #IMPLIED
+      last-modification-time CDATA #IMPLIED
+  >
+  <!ELEMENT include (file)+>
+  <!ELEMENT file EMPTY>
+  <!ATTLIST file
+      path CDATA #REQUIRED
+  >
+  <!ELEMENT comments (comment)+>
+  <!ELEMENT comment EMPTY>
+  <!ATTLIST comment
+      creation-time CDATA #REQUIRED
+      created-by CDATA #REQUIRED
+      created-on CDATA #REQUIRED
+      author CDATA #REQUIRED
+      text CDATA #REQUIRED
+  >
+  <!ELEMENT class (superclass | attribute | relationship | method)*>
+  <!ATTLIST class
+      name CDATA #REQUIRED
+      description CDATA ""
+      is-abstract (yes|no) "no"
+  >
+  <!ELEMENT superclass EMPTY>
+  <!ATTLIST superclass name CDATA #REQUIRED>
+  <!ELEMENT attribute EMPTY>
+  <!ATTLIST attribute
+      name CDATA #REQUIRED
+      description CDATA ""
+      type (bool|s8|u8|s16|u16|s32|u32|s64|u64|float|double|date|time|string|uid|enum|class) #REQUIRED
+      range CDATA ""
+      format (dec|hex|oct) "dec"
+      is-multi-value (yes|no) "no"
+      init-value CDATA ""
+      is-not-null (yes|no) "no"
+      ordered (yes|no) "no"
+  >
+  <!ELEMENT relationship EMPTY>
+  <!ATTLIST relationship
+      name CDATA #REQUIRED
+      description CDATA ""
+      class-type CDATA #REQUIRED
+      low-cc (zero|one) #REQUIRED
+      high-cc (one|many) #REQUIRED
+      is-composite (yes|no) #REQUIRED
+      is-exclusive (yes|no) #REQUIRED
+      is-dependent (yes|no) #REQUIRED
+      ordered (yes|no) "no"
+  >
+  <!ELEMENT method (method-implementation*)>
+  <!ATTLIST method
+      name CDATA #REQUIRED
+      description CDATA ""
+  >
+  <!ELEMENT method-implementation EMPTY>
+  <!ATTLIST method-implementation
+      language CDATA #REQUIRED
+      prototype CDATA #REQUIRED
+      body CDATA ""
+  >
+]>
+
+<oks-schema>
+
+<info name="" type="" num-of-items="34" oks-format="schema" oks-version="oks-08-03-04-1-gf920aa4 built &quot;May 12 2022&quot;" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20230608T111228"/>
+
+ <class name="Application" description="A software executable" is-abstract="yes">
+  <superclass name="ResourceBase"/>
+  <attribute name="application_name" description="Name of the application binary to run." type="string" is-not-null="yes"/>
+  <attribute name="commandline_parameters" description="command line parameters to add when starting the application" type="string"/>
+  <relationship name="applicationEnvironment" description="Define process environment for this application." class-type="VariableBase" low-cc="zero" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
+  <relationship name="runs_on" description="VirtualHost to run this application on" class-type="VirtualHost" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+ </class>
+
+ <class name="Component" description="Abstract base class for Segment and Resource classes. It is only used to allow objects of derived classes to be put into list of disabled items. For more information read https://twiki.cern.ch/twiki/bin/viewauth/Atlas/DaqHltDal#3_4_Resource_Classes" is-abstract="yes">
+  <method name="get_parents" description="The algorithm calculates a vector of segments which are parents of given segment.&#xA;If the segment has parents referenced by the partition object, then:&#xA;- in case of C++ it fills the parents parameter; otherwise it throws {@link NotFoundException} exception">
+   <method-implementation language="c++" prototype="void get_parents(const dunedaq::coredal::Session&amp; session, std::list&lt; std::vector&lt;const dunedaq::coredal::Component *&gt; &gt;&amp; parents) const" body=""/>
+  </method>
+  <method name="disabled" description="The algorithm checks if the segment / resource is disabled in the partition that uses it.&#xA;@param partition      partition object containing this resource or segment&#xA;">
+   <method-implementation language="c++" prototype="bool disabled(const dunedaq::coredal::Session&amp; session, bool skip_check = false) const" body=""/>
+  </method>
+  <method name="why_disabled" description="">
+   <method-implementation language="java" prototype="String why_disabled(Partition partition, String prefix, boolean full_report) throws config.GenericException, config.SystemException, config.NotFoundException, config.NotValidException" body="return partition.resources().why_disabled(this, prefix, full_report);"/>
+  </method>
+ </class>
+
+ <class name="Connection" is-abstract="yes">
+  <attribute name="data_type" type="string" is-not-null="yes"/>
+ </class>
+
+ <class name="ConnectionService">
+  <superclass name="Service"/>
+  <attribute name="port" type="u16" init-value="5000"/>
+  <attribute name="threads" description="Number of worker threads (not the number of workers which are processes)" type="u16" init-value="1" is-not-null="yes"/>
+  <relationship name="runs_on" class-type="PhysicalHost" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
+ </class>
+
+ <class name="DaqApplication">
+  <superclass name="Application"/>
+  <superclass name="ResourceSetAND"/>
+  <attribute name="application_name" description="Name of the application binary to run." type="string" init-value="daq_application" is-not-null="yes"/>
+  <method name="get_used_hostresources" description="Get the set of all HostComponents used by this application">
+   <method-implementation language="c++" prototype=" std::set&lt;const dunedaq::coredal::HostComponent*&gt; get_used_hostresources() const" body=""/>
+  </method>
+ </class>
+
+ <class name="DaqModule" description="A plugin module for the app framework">
+  <superclass name="ResourceBase"/>
+  <attribute name="plugin" description="Name of daq application plugin implementing this module" type="string" is-not-null="yes"/>
+  <relationship name="inputs" description="List of connections to/from this module" class-type="Connection" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="outputs" description="Output connections from this module" class-type="Connection" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="used_resources" class-type="HostComponent" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+ </class>
+
+ <class name="DataLinkHandler">
+  <attribute name="raw_data_input" type="string"/>
+  <attribute name="processing_output" type="string"/>
+ </class>
+
+ <class name="DataReader">
+  <attribute name="emulated" type="bool" init-value="false"/>
+ </class>
+
+ <class name="GenericService">
+  <superclass name="Service"/>
+  <attribute name="uri" type="string" is-not-null="yes"/>
+ </class>
+
+ <class name="HostComponent" is-abstract="yes">
+  <attribute name="numa_id" type="u8" init-value="0" is-not-null="yes"/>
+ </class>
+
+ <class name="NetworkConnection">
+  <superclass name="Connection"/>
+  <attribute name="connection_type" description="Type of the network connection " type="enum" range="kSendRecv,kPubSub" init-value="kSendRecv" is-not-null="yes"/>
+  <attribute name="protocol" description="Protocol of the connection tcp or udp" type="enum" range="tcp,udp" init-value="tcp" is-not-null="yes"/>
+  <attribute name="port" type="u16" is-not-null="yes"/>
+  <attribute name="uri" type="string" is-not-null="yes"/>
+ </class>
+
+ <class name="NetworkDevice">
+  <superclass name="HostComponent"/>
+  <relationship name="network" description="Network interfaces attached to this host" class-type="NetworkInterface" low-cc="one" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+ </class>
+
+ <class name="NetworkInterface">
+  <attribute name="address" description="IP address in form a.b.c.d" type="string"/>
+  <attribute name="networkMask" description="Network mask in for a.b.c.d" type="string"/>
+  <attribute name="speed" description="Speed of network on this interface in Gb/s" type="u16" init-value="1" is-not-null="yes"/>
+  <attribute name="interface" description="Name of interface e.g. eth0 or eno1" type="string"/>
+  <attribute name="name" description="Name of network on this interface  Control or Data" type="enum" range="Control,Data" init-value="Control" is-not-null="yes"/>
+ </class>
+
+ <class name="PhysicalHost">
+  <relationship name="contains" description="List of hardware components on this host" class-type="HostComponent" low-cc="one" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+ </class>
+
+ <class name="ProcessingResource">
+  <superclass name="HostComponent"/>
+  <attribute name="cpu_cores" type="u16" is-multi-value="yes" is-not-null="yes"/>
+ </class>
+
+ <class name="Queue">
+  <superclass name="Connection"/>
+  <attribute name="capacity" type="u32" init-value="10" is-not-null="yes"/>
+  <attribute name="queue_type" description="Type of queue" type="enum" range="kUnknown,kStdDeQueue,kFollySPSCQueue,kFollyMPMCQueue" init-value="kFollySPSCQueue" is-not-null="yes"/>
+ </class>
+
+ <class name="RCApplication" description="An executable which allows users to control datataking">
+  <superclass name="Application"/>
+  <attribute name="application_name" type="string" init-value="controller" is-not-null="yes"/>
+ </class>
+
+ <class name="ReadoutApplication">
+  <superclass name="DaqApplication"/>
+  <relationship name="runs_on" class-type="ReadoutHost" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="uses" description="Configuration of the host hardware resources used by this application" class-type="RoHwConfig" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="link_handler" class-type="DataLinkHandler" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
+  <relationship name="tp_handler" class-type="TPHandler" low-cc="zero" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
+  <relationship name="data_reader" class-type="DataReader" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
+ </class>
+
+ <class name="ReadoutHost">
+  <superclass name="VirtualHost"/>
+ </class>
+
+ <class name="Resource">
+  <superclass name="ResourceBase"/>
+ </class>
+
+ <class name="ResourceBase">
+  <superclass name="Component"/>
+  <method name="get_resources" description="Returns list of resources including those defined by the nested sets. If the session parameter is provided (i.e. it is not &lt;b&gt;null&lt;/b&gt;), only enabled resources are added.">
+   <method-implementation language="c++" prototype="void get_resources(oksdbinterfaces::Configuration&amp; db, std::list&lt;const Resource *&gt;&amp; out, const Session * session = 0) const" body=""/>
+  </method>
+ </class>
+
+ <class name="ResourceSet">
+  <superclass name="ResourceBase"/>
+  <relationship name="contains" description="A resource set is a container of resources to easily implement group operations (add/remove, enable/disable)." class-type="ResourceBase" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="no"/>
+ </class>
+
+ <class name="ResourceSetAND" description="This resource set is considered disabled when ALL nested resources are disabled.">
+  <superclass name="ResourceSet"/>
+ </class>
+
+ <class name="ResourceSetOR" description="This resource set is considered disabled when ANY nested resource is disabled.">
+  <superclass name="ResourceSet"/>
+ </class>
+
+ <class name="RoHwConfig">
+  <relationship name="io_device" description="Device handling input from the fron-end electronics" class-type="NetworkDevice" low-cc="zero" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="snb_storage" class-type="StorageDevice" low-cc="zero" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="recv_processor" class-type="ProcessingResource" low-cc="zero" high-cc="one" is-composite="yes" is-exclusive="yes" is-dependent="yes"/>
+  <relationship name="hitFindingProc" class-type="ProcessingResource" low-cc="zero" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+ </class>
+
+ <class name="Segment" description="Logical sub division of the configuration that can be enabled/disabled as a group">
+  <superclass name="ResourceBase"/>
+  <relationship name="segments" description="Nested list of Segments that form part of this Segment" class-type="Segment" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="applications" description="List of Applications that run in this Segment" class-type="Application" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="controller" description="This Segment&apos;s run controller. If not set, Segment is controlled by controller of parent Segment/Session" class-type="RCApplication" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="resources" class-type="ResourceSet" low-cc="zero" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
+  <method name="get_base_segment" description="">
+   <method-implementation language="c++" prototype="const Segment * get_base_segment() const" body=""/>
+  </method>
+ </class>
+
+ <class name="Service">
+  <attribute name="enabled" type="bool" init-value="true" is-not-null="yes"/>
+ </class>
+
+ <class name="Session">
+  <attribute name="description" description="A description of the session." type="string"/>
+  <attribute name="use_connectivity_server" description="If set publish and lookup connection information in the connectivity server. If not all information will be provided by the configuration database." type="bool" init-value="true" is-not-null="yes"/>
+  <attribute name="connectivity_service_interval_ms" description="Interval between publishes and polls of connectivity service information" type="u32" init-value="2000" is-not-null="yes"/>
+  <relationship name="environment" description="Define process environment for any application run in given session." class-type="VariableBase" low-cc="zero" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
+  <relationship name="disabled" description="Resources that should not participate in the current run" class-type="ResourceBase" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="segment" description="List of configuration Segments that form this Session" class-type="Segment" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="services" class-type="Service" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <method name="get_all_applications" description="Returns applications defined in the Session and all of its Segments.">
+   <method-implementation language="c++" prototype="std::vector&lt;const dunedaq::coredal::Application *&gt; get_all_applications() const" body=""/>
+  </method>
+  <method name="set_disabled" description="In addition to persistently disabled components, dynamically disable these components. It will be taken into account by disabled() algorithm of Component class. This information is not committed to the database and will be overwritten by next set_disabled() call or erased by any config action (DB load, unload, reload).">
+   <method-implementation language="c++" prototype="void set_disabled(const std::set&lt;const dunedaq::coredal::Component *&gt;&amp; objs) const" body="BEGIN_PRIVATE_SECTION&#xA;friend class DisabledComponents;&#xA;friend class Component;&#xA;mutable dunedaq::coredal::DisabledComponents m_disabled_components; &#xA;END_PRIVATE_SECTION&#xA;BEGIN_MEMBER_INITIALIZER_LIST&#xA;m_disabled_components(p_db,this)&#xA;END_MEMBER_INITIALIZER_LIST&#xA;BEGIN_HEADER_PROLOGUE&#xA;#include &quot;coredal/disabled-components.hpp&quot;&#xA;END_HEADER_PROLOGUE"/>
+  </method>
+  <method name="set_enabled" description="Dynamically enable these persistently disabled components. It will be taken into account by disabled() algorithm of the Component class. This information is not committed to the database and will be overwritten by next set_enabled() call or erased by any config action (DB load, unload, reload).">
+   <method-implementation language="c++" prototype="void set_enabled(const std::set&lt;const dunedaq::coredal::Component *&gt;&amp; objs) const" body=""/>
+  </method>
+ </class>
+
+ <class name="StorageDevice">
+  <superclass name="HostComponent"/>
+  <attribute name="storage" description="Amount of disk storage available for output data on this host in GB" type="u32" init-value="0" is-not-null="yes"/>
+ </class>
+
+ <class name="TPHandler">
+ </class>
+
+ <class name="Variable" description="A Variable associates a value with string name. It is used for process environment and database strings substitution.">
+  <superclass name="VariableBase"/>
+  <attribute name="name" description="Name of the variable." type="string"/>
+  <attribute name="value" description="Value of the variable." type="string"/>
+ </class>
+
+ <class name="VariableBase" description="This abstract class is used to describe a single variable (name:value pair) or a set of variables." is-abstract="yes">
+  <attribute name="description" description="Describes the purpose of the parameter." type="string"/>
+ </class>
+
+ <class name="VariableSet" description="Set of variables or variable sets. Names and values of all nested variables are added to value of relationship using resource set.">
+  <superclass name="VariableBase"/>
+  <relationship name="contains" description="List of included variables or variable sets." class-type="VariableBase" low-cc="one" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
+ </class>
+
+ <class name="VirtualHost">
+  <relationship name="uses" description="Hardware resources required by this virtual host" class-type="HostComponent" low-cc="one" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="runs_on" description="The physical host that this virtual host runs on" class-type="PhysicalHost" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+ </class>
+
+</oks-schema>
