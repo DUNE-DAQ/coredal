@@ -17,7 +17,7 @@ find_package(oksdbinterfaces REQUIRED)
 
 ##############################################################################
 
-daq_oks_codegen(dunedaq.schema.xml NAMESPACE dunedaq::coredal)
+daq_oks_codegen(dunedaq.schema.xml)
 
 daq_add_library(dalMethods.cpp
   test_circular_dependency.cpp disabled-components.cpp
