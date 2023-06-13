@@ -80,7 +80,7 @@
 
 <oks-schema>
 
-<info name="" type="" num-of-items="34" oks-format="schema" oks-version="oks-08-03-04-1-gf920aa4 built &quot;May 12 2022&quot;" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20230608T111228"/>
+<info name="" type="" num-of-items="40" oks-format="schema" oks-version="oks-08-03-04-1-gf920aa4 built &quot;May 12 2022&quot;" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20230613T113314"/>
 
  <class name="Application" description="A software executable" is-abstract="yes">
   <superclass name="ResourceBase"/>
@@ -113,6 +113,13 @@
   <relationship name="runs_on" class-type="PhysicalHost" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
  </class>
 
+ <class name="DLH">
+  <attribute name="source_id" type="u32" is-not-null="yes"/>
+  <relationship name="handler_configuration" class-type="LinkHandlerConf" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
+  <relationship name="raw_data_input" class-type="Connection" low-cc="zero" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
+  <relationship name="processing_output" class-type="Connection" low-cc="zero" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
+ </class>
+
  <class name="DaqApplication">
   <superclass name="Application"/>
   <superclass name="ResourceSetAND"/>
@@ -130,13 +137,19 @@
   <relationship name="used_resources" class-type="HostComponent" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
  </class>
 
- <class name="DataLinkHandler">
-  <attribute name="raw_data_input" type="string"/>
-  <attribute name="processing_output" type="string"/>
+ <class name="DataProcessor">
+  <attribute name="queue_size" type="u32" init-value="10000"/>
+  <attribute name="max_ticks_tot" type="u32" init-value="8000" is-not-null="yes"/>
+  <attribute name="tpg_enabled" type="bool" init-value="true"/>
+  <attribute name="algorithm" description="TP generation algorithm" type="string"/>
+  <attribute name="threshold" description="Hit detection threshold" type="u16"/>
+  <attribute name="channel_mask" description="List of channels to be masked from TP generation" type="u32" is-multi-value="yes"/>
+  <attribute name="channel_map" type="string"/>
  </class>
 
  <class name="DataReader">
   <attribute name="emulated" type="bool" init-value="false"/>
+  <attribute name="source_ids" description="List of source ids that this reader handles" type="u32" is-multi-value="yes" is-not-null="yes"/>
  </class>
 
  <class name="GenericService">
@@ -146,6 +159,26 @@
 
  <class name="HostComponent" is-abstract="yes">
   <attribute name="numa_id" type="u8" init-value="0" is-not-null="yes"/>
+ </class>
+
+ <class name="LatencyBuffer">
+  <attribute name="size" type="u32" init-value="1000" is-not-null="yes"/>
+  <attribute name="numa_aware" type="bool" init-value="true"/>
+  <attribute name="numa_node" type="s16" init-value="0"/>
+  <attribute name="use_intrinsic_allocator" type="bool" init-value="true"/>
+  <attribute name="alignment_size" type="u32" init-value="1000"/>
+  <attribute name="preallocation" type="bool" init-value="true"/>
+ </class>
+
+ <class name="LinkHandlerConf">
+  <attribute name="handlier_threads" description="Number of threads tohandle this link" type="u16" init-value="1"/>
+  <attribute name="request_timeout" description="Request timeout in milliseconds" type="u32" init-value="10000" is-not-null="yes"/>
+  <attribute name="output_file" type="string"/>
+  <attribute name="streaming_buffer_size" type="u32" init-value="1000" is-not-null="yes"/>
+  <attribute name="use_o_direct" description="Whether to use O_DIRECT flag when opening files" type="bool" init-value="true"/>
+  <attribute name="enable_raw_recording" type="bool" init-value="true"/>
+  <relationship name="latency_buffer" class-type="LatencyBuffer" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
+  <relationship name="data_processor" class-type="DataProcessor" low-cc="zero" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
  </class>
 
  <class name="NetworkConnection">
@@ -184,6 +217,16 @@
   <attribute name="queue_type" description="Type of queue" type="enum" range="kUnknown,kStdDeQueue,kFollySPSCQueue,kFollyMPMCQueue" init-value="kFollySPSCQueue" is-not-null="yes"/>
  </class>
 
+ <class name="QueueConnectionRule">
+  <attribute name="destination_class" type="class" init-value="DaqModule"/>
+  <relationship name="descriptor" class-type="QueueDescriptor" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
+ </class>
+
+ <class name="QueueDescriptor">
+  <attribute name="type" description="Type of queue" type="enum" range="kUnknown,kStdDeQueue,kFollySPSCQueue,kFollyMPMCQueue" init-value="kFollySPSCQueue" is-not-null="yes"/>
+  <attribute name="capacity" type="u32" init-value="100" is-not-null="yes"/>
+ </class>
+
  <class name="RCApplication" description="An executable which allows users to control datataking">
   <superclass name="Application"/>
   <attribute name="application_name" type="string" init-value="controller" is-not-null="yes"/>
@@ -193,9 +236,13 @@
   <superclass name="DaqApplication"/>
   <relationship name="runs_on" class-type="ReadoutHost" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
   <relationship name="uses" description="Configuration of the host hardware resources used by this application" class-type="RoHwConfig" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
-  <relationship name="link_handler" class-type="DataLinkHandler" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
+  <relationship name="link_handler" class-type="LinkHandlerConf" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
   <relationship name="tp_handler" class-type="TPHandler" low-cc="zero" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
-  <relationship name="data_reader" class-type="DataReader" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
+  <relationship name="data_readers" class-type="DataReader" low-cc="one" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
+  <relationship name="queue_rules" class-type="QueueConnectionRule" low-cc="zero" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
+  <method name="generateDLH" description="Generate DLH dal objects for streams of thie ReadoutApplication on the fly">
+   <method-implementation language="c++" prototype=" std::vector&lt;const dunedaq::coredal::DLH*&gt; generateDLH() const" body=""/>
+  </method>
  </class>
 
  <class name="ReadoutHost">
@@ -273,6 +320,16 @@
  </class>
 
  <class name="TPHandler">
+  <attribute name="source_id" type="u32" is-not-null="yes"/>
+  <relationship name="handler_configuration" class-type="TPHandlerConf" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
+ </class>
+
+ <class name="TPHandlerConf">
+  <attribute name="handler_threads" type="u16" init-value="1" is-not-null="yes"/>
+  <attribute name="request_timeout" type="u32" init-value="1000" is-not-null="yes"/>
+  <attribute name="min_latency_ticks" type="u32" init-value="100" is-not-null="yes"/>
+  <attribute name="max_transmission_rate_hz" type="u32" init-value="1000" is-not-null="yes"/>
+  <relationship name="latency_buffer" class-type="LatencyBuffer" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
  </class>
 
  <class name="Variable" description="A Variable associates a value with string name. It is used for process environment and database strings substitution.">
