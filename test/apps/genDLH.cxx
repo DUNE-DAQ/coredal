@@ -47,6 +47,9 @@ int main(int argc, char* argv[]) {
     oksdbinterfaces::ConfigObject tpQueueObj;
     if (outputQDesc != nullptr) {
       confdb->create(dbfile, "Queue", tpQueueUid, tpQueueObj);
+      tpQueueObj.set_by_val<std::string>("data_type", outputQDesc->get_data_type());
+      tpQueueObj.set_by_val<std::string>("queue_type", outputQDesc->get_queue_type());
+      tpQueueObj.set_by_val<uint32_t>("capacity", outputQDesc->get_capacity());
     }
 
     for (auto reader : daqapp->get_data_readers()) {
@@ -60,10 +63,13 @@ int main(int argc, char* argv[]) {
         std::string queueUid("inputToDLH-"+std::to_string(id));
         oksdbinterfaces::ConfigObject queueObj;
         confdb->create(dbfile, "Queue", queueUid, queueObj);
-        dlhObj.set_obj("raw_data_input", &queueObj);
+        queueObj.set_by_val<std::string>("data_type", inputQDesc->get_data_type());
+        queueObj.set_by_val<std::string>("queue_type", inputQDesc->get_queue_type());
+        queueObj.set_by_val<uint32_t>("capacity", inputQDesc->get_capacity());
+        dlhObj.set_objs("inputs", {&queueObj});
 
         if (outputQDesc != nullptr) {
-          dlhObj.set_obj("processing_output", &tpQueueObj);
+          dlhObj.set_objs("outputs", {&tpQueueObj});
         }
 
 //        confdb->commit();
