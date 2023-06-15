@@ -19,10 +19,10 @@ find_package(oksdbinterfaces REQUIRED)
 
 daq_oks_codegen(dunedaq.schema.xml NAMESPACE dunedaq::coredal)
 
-daq_add_library(dalMethods.cpp
+daq_add_library(dalMethods.cpp generate_modules.cpp
   test_circular_dependency.cpp disabled-components.cpp
   LINK_LIBRARIES oksdbinterfaces::oksdbinterfaces okssystem::okssystem
-  logging::logging coredal_oks)
+  logging::logging coredal_oks ers::ers)
 
 
 daq_add_application(listApps list_apps.cxx
@@ -30,7 +30,7 @@ daq_add_application(listApps list_apps.cxx
 
 daq_add_application(disable_test disable_test.cxx TEST
   LINK_LIBRARIES coredal oksdbinterfaces::oksdbinterfaces logging::logging)
-daq_add_application(genDLH genDLH.cxx TEST
+daq_add_application(genReadoutModules genReadoutModules.cxx TEST
   LINK_LIBRARIES coredal oksdbinterfaces::oksdbinterfaces logging::logging)
 ##############################################################################
 
