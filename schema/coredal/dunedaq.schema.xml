@@ -80,7 +80,7 @@
 
 <oks-schema>
 
-<info name="" type="" num-of-items="34" oks-format="schema" oks-version="oks-08-03-04-1-gf920aa4 built &quot;May 12 2022&quot;" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20230608T111228"/>
+<info name="" type="" num-of-items="28" oks-format="schema" oks-version="oks-08-03-04-1-gf920aa4 built &quot;May 12 2022&quot;" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20230620T113650"/>
 
  <class name="Application" description="A software executable" is-abstract="yes">
   <superclass name="ResourceBase"/>
@@ -128,15 +128,6 @@
   <relationship name="inputs" description="List of connections to/from this module" class-type="Connection" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
   <relationship name="outputs" description="Output connections from this module" class-type="Connection" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
   <relationship name="used_resources" class-type="HostComponent" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
- </class>
-
- <class name="DataLinkHandler">
-  <attribute name="raw_data_input" type="string"/>
-  <attribute name="processing_output" type="string"/>
- </class>
-
- <class name="DataReader">
-  <attribute name="emulated" type="bool" init-value="false"/>
  </class>
 
  <class name="GenericService">
@@ -189,19 +180,6 @@
   <attribute name="application_name" type="string" init-value="controller" is-not-null="yes"/>
  </class>
 
- <class name="ReadoutApplication">
-  <superclass name="DaqApplication"/>
-  <relationship name="runs_on" class-type="ReadoutHost" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
-  <relationship name="uses" description="Configuration of the host hardware resources used by this application" class-type="RoHwConfig" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
-  <relationship name="link_handler" class-type="DataLinkHandler" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
-  <relationship name="tp_handler" class-type="TPHandler" low-cc="zero" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
-  <relationship name="data_reader" class-type="DataReader" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
- </class>
-
- <class name="ReadoutHost">
-  <superclass name="VirtualHost"/>
- </class>
-
  <class name="Resource">
   <superclass name="ResourceBase"/>
  </class>
@@ -224,13 +202,6 @@
 
  <class name="ResourceSetOR" description="This resource set is considered disabled when ANY nested resource is disabled.">
   <superclass name="ResourceSet"/>
- </class>
-
- <class name="RoHwConfig">
-  <relationship name="io_device" description="Device handling input from the fron-end electronics" class-type="NetworkDevice" low-cc="zero" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
-  <relationship name="snb_storage" class-type="StorageDevice" low-cc="zero" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
-  <relationship name="recv_processor" class-type="ProcessingResource" low-cc="zero" high-cc="one" is-composite="yes" is-exclusive="yes" is-dependent="yes"/>
-  <relationship name="hitFindingProc" class-type="ProcessingResource" low-cc="zero" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
  </class>
 
  <class name="Segment" description="Logical sub division of the configuration that can be enabled/disabled as a group">
@@ -270,9 +241,6 @@
  <class name="StorageDevice">
   <superclass name="HostComponent"/>
   <attribute name="storage" description="Amount of disk storage available for output data on this host in GB" type="u32" init-value="0" is-not-null="yes"/>
- </class>
-
- <class name="TPHandler">
  </class>
 
  <class name="Variable" description="A Variable associates a value with string name. It is used for process environment and database strings substitution.">
