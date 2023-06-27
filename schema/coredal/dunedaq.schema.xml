@@ -80,7 +80,7 @@
 
 <oks-schema>
 
-<info name="" type="" num-of-items="28" oks-format="schema" oks-version="oks-08-03-04-1-gf920aa4 built &quot;May 12 2022&quot;" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20230620T113650"/>
+<info name="" type="" num-of-items="29" oks-format="schema" oks-version="oks-08-03-04-1-gf920aa4 built &quot;May 12 2022&quot;" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20230626T114252"/>
 
  <class name="Application" description="A software executable" is-abstract="yes">
   <superclass name="ResourceBase"/>
@@ -128,6 +128,12 @@
   <relationship name="inputs" description="List of connections to/from this module" class-type="Connection" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
   <relationship name="outputs" description="Output connections from this module" class-type="Connection" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
   <relationship name="used_resources" class-type="HostComponent" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+ </class>
+
+ <class name="DetectorConfig">
+  <attribute name="tpg_channel_map" description="Trigger Primitive channel map" type="string" init-value="PD2HDChannelMap" is-not-null="yes"/>
+  <attribute name="clock_speed_hz" type="string" init-value="62500000" is-not-null="yes"/>
+  <attribute name="op_env" description="Operational environment " type="string" init-value="swtest" is-not-null="yes"/>
  </class>
 
  <class name="GenericService">
@@ -223,10 +229,13 @@
   <attribute name="description" description="A description of the session." type="string"/>
   <attribute name="use_connectivity_server" description="If set publish and lookup connection information in the connectivity server. If not all information will be provided by the configuration database." type="bool" init-value="true" is-not-null="yes"/>
   <attribute name="connectivity_service_interval_ms" description="Interval between publishes and polls of connectivity service information" type="u32" init-value="2000" is-not-null="yes"/>
+  <attribute name="data_request_timeout_ms" description="The baseline data request timeout that will be used by modules in the Readout and Trigger subsystems (i.e. any module that produces data fragments). Downstream timeouts, such as the trigger-record-building timeout, are derived from this" type="u32" init-value="1000" is-not-null="yes"/>
+  <attribute name="data_rate_slowdown_factor" description="&quot;Factor by which to suppress data generation." type="u32" init-value="1" is-not-null="yes"/>
   <relationship name="environment" description="Define process environment for any application run in given session." class-type="VariableBase" low-cc="zero" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
   <relationship name="disabled" description="Resources that should not participate in the current run" class-type="ResourceBase" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
   <relationship name="segment" description="List of configuration Segments that form this Session" class-type="Segment" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
   <relationship name="services" class-type="Service" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="detector_configuration" class-type="DetectorConfig" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
   <method name="get_all_applications" description="Returns applications defined in the Session and all of its Segments.">
    <method-implementation language="c++" prototype="std::vector&lt;const dunedaq::coredal::Application *&gt; get_all_applications() const" body=""/>
   </method>
