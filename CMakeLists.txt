@@ -1,6 +1,6 @@
 
 cmake_minimum_required(VERSION 3.12)
-project(coredal VERSION 0.0.0)
+project(coredal VERSION 1.0.0)
 
 find_package(daq-cmake REQUIRED)
 
@@ -17,7 +17,7 @@ find_package(oksdbinterfaces REQUIRED)
 
 ##############################################################################
 
-daq_oks_codegen(dunedaq.schema.xml NAMESPACE dunedaq::coredal)
+daq_oks_codegen(dunedaq.schema.xml)
 
 daq_add_library(dalMethods.cpp
   test_circular_dependency.cpp disabled-components.cpp
