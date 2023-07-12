@@ -25,6 +25,10 @@ int main(int argc, char* argv[]) {
 
   std::string sessionName(argv[1]);
   auto session = confdb->get<coredal::Session>(sessionName);
+  if (session==nullptr) {
+    std::cerr << "Session " << sessionName << " not found in database\n";
+    return -1;
+  }
   for (auto app : session->get_all_applications()) {
     std::cout << "Application: " << app->UID();
     if (app->disabled(*session)) {
