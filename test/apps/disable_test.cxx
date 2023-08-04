@@ -15,12 +15,12 @@ using namespace dunedaq;
 void listApps(const coredal::Session* session) {
   for (auto app : session->get_all_applications()) {
     std::cout << "Application: " << app->UID();
-    if (app->disabled(*session)) {
-      std::cout << "<disabled>";
-    }
-    else {
-      auto daqApp = app->cast<coredal::DaqApplication>();
-      if (daqApp) {
+    auto daqApp = app->cast<coredal::DaqApplication>();
+    if (daqApp) {
+      if (daqApp->disabled(*session)) {
+        std::cout << "<disabled>";
+      }
+      else {
         std::cout << " Modules:";
         for (auto mod : daqApp->get_contains()) {
           std::cout << " " << mod->UID();
@@ -47,7 +47,10 @@ int main(int argc, char* argv[]) {
 
   std::string sessionName(argv[1]);
   auto session = confdb->get<coredal::Session>(sessionName);
-
+  if (session == nullptr) {
+    std::cerr << "Session " << sessionName << " not found in database\n";
+    return -1;
+  }
   auto disabled = session->get_disabled();
   std::cout << "Currently " << disabled.size() << " items disabled: ";
   for (auto item : disabled) {

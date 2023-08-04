@@ -31,12 +31,12 @@ int main(int argc, char* argv[]) {
   }
   for (auto app : session->get_all_applications()) {
     std::cout << "Application: " << app->UID();
-    if (app->disabled(*session)) {
-      std::cout << "<disabled>";
-    }
-    else {
-      auto daqApp = app->cast<coredal::DaqApplication>();
-      if (daqApp) {
+    auto daqApp = app->cast<coredal::DaqApplication>();
+    if (daqApp) {
+      if (daqApp->disabled(*session)) {
+        std::cout << "<disabled>";
+      }
+      else {
         std::cout << " Modules:";
         for (auto mod : daqApp->get_contains()) {
           std::cout << " " << mod->UID();
