@@ -97,6 +97,12 @@ dunedaq::coredal::DisabledComponents::disable_children(const dunedaq::coredal::S
       disable_children(*rs);
     }
   }
+  for (auto & app : segment.get_applications()) {
+    auto res = app->cast<dunedaq::coredal::Component>();
+    if (res) {
+      disable(*res);
+    }
+  }
   for (auto & seg : segment.get_segments()) {
     TLOG_DEBUG(6) <<  "disable segment " << seg << " because it's parent segment " << &segment << " is disabled" ;
     disable(*seg);
@@ -196,6 +202,7 @@ static void fill(
   }
 
   for (auto & seg : s.get_segments()) {
+    TLOG_DEBUG(6) << "Filling segment " << seg->UID();
     dunedaq::coredal::AddTestOnCircularDependency add_fuse_test(cd_fuse, seg);
     fill(*seg, rs_or, rs_and, cd_fuse);
   }
@@ -238,7 +245,7 @@ static void fill(
 bool
 dunedaq::coredal::Component::disabled(const dunedaq::coredal::Session& session, bool skip_check) const
 {
-  TLOG_DEBUG( 6) << "Session UID: " << session.UID();
+  TLOG_DEBUG( 6) << "Session UID: " << session.UID() << " this->UID()=" << UID();
   // fill disabled (e.g. after session changes)
 
   if (session.m_disabled_components.size() == 0) {
@@ -263,19 +270,19 @@ dunedaq::coredal::Component::disabled(const dunedaq::coredal::Session& session, 
         // add user disabled components, if any
         for (auto & i : session.m_disabled_components.m_user_disabled) {
           vector_of_disabled.push_back(i);
-          TLOG_DEBUG(6) <<  "disable component " << i << " because it is explicitly disabled by user" ;
+          TLOG_DEBUG(6) <<  "disable component " << i->UID() << " because it is explicitly disabled by user" ;
         }
 
         // add session-disabled components ignoring explicitly enabled by user
         for (auto & i : session.get_disabled()) {
-          TLOG_DEBUG(6) <<  "check component " << i << " explicitly disabled in session" ;
+          TLOG_DEBUG(6) <<  "check component " << i->UID() << " explicitly disabled in session" ;
 
           if (session.m_disabled_components.m_user_enabled.find(i) == session.m_disabled_components.m_user_enabled.end()) {
             vector_of_disabled.push_back(i);
-            TLOG_DEBUG(6) <<  "disable component " << i << " because it is not explicitly enabled in session" ;
+            TLOG_DEBUG(6) <<  "disable component " << i->UID() << " because it is not explicitly enabled in session" ;
           }
           else {
-            TLOG_DEBUG(6) <<  "skip component " << i << " because it is enabled by user" ;
+            TLOG_DEBUG(6) <<  "skip component " << i->UID() << " because it is enabled by user" ;
           }
         }
 
@@ -287,6 +294,7 @@ dunedaq::coredal::Component::disabled(const dunedaq::coredal::Session& session, 
             session.m_disabled_components.disable_children(*rs);
           }
           else if (const dunedaq::coredal::Segment * seg = i->cast<dunedaq::coredal::Segment>()) {
+            TLOG_DEBUG(6) << "Disabling children of segment " << seg->UID();
             session.m_disabled_components.disable_children(*seg);
           }
         }
@@ -304,7 +312,7 @@ dunedaq::coredal::Component::disabled(const dunedaq::coredal::Session& session, 
             TLOG_DEBUG(6) << "ResourceSetOR " << i->UID() << " contains " << i->get_contains().size() << " resources";
             for (auto & i2 : i->get_contains()) {
               if (!session.m_disabled_components.is_enabled_short(i2)) {
-                TLOG_DEBUG(6) <<  "disable resource-set-OR " << i << " because it's child " << i2 << " is disabled" ;
+                TLOG_DEBUG(6) <<  "disable resource-set-OR " << i->UID() << " because it's child " << i2 << " is disabled" ;
                 session.m_disabled_components.disable(*i);
                 session.m_disabled_components.disable_children(*i);
                 break;
@@ -329,7 +337,7 @@ dunedaq::coredal::Component::disabled(const dunedaq::coredal::Session& session, 
                 }
               }
               if (found_enabled == false) {
-                TLOG_DEBUG(6) <<  "disable resource-set-AND " << j << " because all it's children are disabled" ;
+                TLOG_DEBUG(6) <<  "disable resource-set-AND " << j->UID() << " because all it's children are disabled" ;
                 session.m_disabled_components.disable(*j);
                 session.m_disabled_components.disable_children(*j);
               }
@@ -352,7 +360,7 @@ dunedaq::coredal::Component::disabled(const dunedaq::coredal::Session& session, 
   }
 
   bool result(skip_check ? !session.m_disabled_components.is_enabled_short(this) : !session.m_disabled_components.is_enabled(this));
-  TLOG_DEBUG( 6) <<  "disabled(" << this << ") returns " << std::boolalpha << result  ;
+  TLOG_DEBUG( 6) <<  "disabled(" << this << ")  (UID=" << UID() << ") returns " << std::boolalpha << result  ;
   return result;
 }
 
