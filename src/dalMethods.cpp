@@ -91,12 +91,6 @@ make_parents_list(
       else if (const auto resource_set = app->cast<dunedaq::coredal::ResourceSet>())
         make_parents_list(child, resource_set, p_list, out, cd_fuse);
     }
-    for (const auto& res : segment->get_resources()) {
-      if (res->config_object().implementation() == child)
-        out.push_back(p_list);
-      else if (const auto resource_set = res->cast<dunedaq::coredal::ResourceSet>())
-        make_parents_list(child, resource_set, p_list, out, cd_fuse);
-    }
   }
 
   // remove the segment from the path
@@ -173,12 +167,9 @@ Session::get_all_applications() const {
 std::set<const HostComponent*>
 DaqApplication::get_used_hostresources() const {
   std::set<const HostComponent*> res;
-  for (auto resource :  get_contains()) {
-    auto module=resource->cast<DaqModule>();
-    if (module) {
-      for (auto hostresource : module->get_used_resources()) {
-        res.insert(hostresource);
-      }
+  for (auto module :  get_modules()) {
+    for (auto hostresource : module->get_used_resources()) {
+      res.insert(hostresource);
     }
   }
   return res;

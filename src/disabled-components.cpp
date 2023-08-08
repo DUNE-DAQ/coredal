@@ -81,11 +81,6 @@ DisabledComponents::disable_children(const ResourceSet& rs)
 void
 DisabledComponents::disable_children(const Segment& segment)
 {
-  for (auto & res : segment.get_resources()) {
-    if (const auto * rs = res->cast<ResourceSet>()) {
-      disable_children(*rs);
-    }
-  }
   for (auto & app : segment.get_applications()) {
     auto res = app->cast<Component>();
     if (res) {
@@ -180,12 +175,6 @@ static void fill(
   for (auto & app : s.get_applications()) {
     AddTestOnCircularDependency add_fuse_test(cd_fuse, app);
     if (const ResourceSet * rs = app->cast<ResourceSet>()) {
-      fill(*rs, rs_or, rs_and, cd_fuse);
-    }
-  }
-  for (auto & res : s.get_resources()) {
-    AddTestOnCircularDependency add_fuse_test(cd_fuse, res);
-    if (const ResourceSet * rs = res->cast<ResourceSet>()) {
       fill(*rs, rs_or, rs_and, cd_fuse);
     }
   }

@@ -5,6 +5,7 @@
 #include "coredal/Component.hpp"
 #include "coredal/DaqApplication.hpp"
 #include "coredal/DaqModule.hpp"
+#include "coredal/ResourceSet.hpp"
 #include "coredal/Segment.hpp"
 #include "coredal/Session.hpp"
 
@@ -16,19 +17,25 @@ using namespace dunedaq;
 void listApps(const coredal::Session* session) {
   for (auto app : session->get_all_applications()) {
     std::cout << "Application: " << app->UID();
-    auto daqApp = app->cast<coredal::DaqApplication>();
-    if (daqApp) {
-      if (daqApp->disabled(*session)) {
+    auto res = app->cast<coredal::ResourceSet>();
+    if (res) {
+      if (res->disabled(*session)) {
         std::cout << "<disabled>";
       }
       else {
-        std::cout << " Modules:";
-        for (auto mod : daqApp->get_contains()) {
+        for (auto mod : res->get_contains()) {
           std::cout << " " << mod->UID();
           if (mod->disabled(*session)) {
             std::cout << "<disabled>";
           }
         }
+      }
+    }
+    auto daqApp = app->cast<coredal::DaqApplication>();
+    if (daqApp) {
+      std::cout << " Modules:";
+      for (auto mod : daqApp->get_modules()) {
+        std::cout << " " << mod->UID();
       }
     }
     std::cout << std::endl;
@@ -54,7 +61,7 @@ int main(int argc, char* argv[]) {
   }
 
 
-  std::cout << "======\nChecking segments disabled state\n";
+  std::cout << "Checking segments disabled state\n";
   auto rseg = session->get_segment();
   if (!rseg->disabled(*session)) {
     std::cout << "Root segment " << rseg->UID()
@@ -66,10 +73,8 @@ int main(int argc, char* argv[]) {
     }
   }
 
-
-
   auto disabled = session->get_disabled();
-  std::cout << "Currently " << disabled.size() << " items disabled: ";
+  std::cout << "======\nCurrently " << disabled.size() << " items disabled: ";
   for (auto item : disabled) {
     std::cout << " " << item->UID();
   }

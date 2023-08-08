@@ -5,6 +5,7 @@
 #include "coredal/Component.hpp"
 #include "coredal/DaqApplication.hpp"
 #include "coredal/DaqModule.hpp"
+#include "coredal/ResourceSet.hpp"
 #include "coredal/Segment.hpp"
 #include "coredal/Session.hpp"
 
@@ -31,19 +32,25 @@ int main(int argc, char* argv[]) {
   }
   for (auto app : session->get_all_applications()) {
     std::cout << "Application: " << app->UID();
-    auto daqApp = app->cast<coredal::DaqApplication>();
-    if (daqApp) {
-      if (daqApp->disabled(*session)) {
+    auto res = app->cast<coredal::ResourceSet>();
+    if (res) {
+      if (res->disabled(*session)) {
         std::cout << "<disabled>";
       }
       else {
-        std::cout << " Modules:";
-        for (auto mod : daqApp->get_contains()) {
+        for (auto mod : res->get_contains()) {
           std::cout << " " << mod->UID();
           if (mod->disabled(*session)) {
             std::cout << "<disabled>";
           }
         }
+      }
+    }
+    auto daqApp = app->cast<coredal::DaqApplication>();
+    if (daqApp) {
+      std::cout << " Modules:";
+      for (auto mod : daqApp->get_modules()) {
+        std::cout << " " << mod->UID();
       }
     }
     std::cout << std::endl;
