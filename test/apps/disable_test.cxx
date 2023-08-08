@@ -5,6 +5,7 @@
 #include "coredal/Component.hpp"
 #include "coredal/DaqApplication.hpp"
 #include "coredal/DaqModule.hpp"
+#include "coredal/Segment.hpp"
 #include "coredal/Session.hpp"
 
 #include <iostream>
@@ -51,6 +52,22 @@ int main(int argc, char* argv[]) {
     std::cerr << "Session " << sessionName << " not found in database\n";
     return -1;
   }
+
+
+  std::cout << "======\nChecking segments disabled state\n";
+  auto rseg = session->get_segment();
+  if (!rseg->disabled(*session)) {
+    std::cout << "Root segment " << rseg->UID()
+              << " is not disabled, looping over contained segments\n";
+    for (auto seg : rseg->get_segments()) {
+      std::cout << "Segment " << seg->UID()
+                << std::string(seg->disabled(*session)? " is ":" is not ")
+                << "disabled\n";
+    }
+  }
+
+
+
   auto disabled = session->get_disabled();
   std::cout << "Currently " << disabled.size() << " items disabled: ";
   for (auto item : disabled) {
@@ -75,4 +92,5 @@ int main(int argc, char* argv[]) {
   std::cout << "======\nNow trying to set disabled to an empty list \n";
   session->set_disabled({});
   listApps(session);
+
 }

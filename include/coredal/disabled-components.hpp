@@ -87,11 +87,7 @@ namespace dunedaq::coredal {
       }
 
       bool
-      is_enabled(const dunedaq::coredal::Component* c);
-
-      bool
-      is_enabled_short(const dunedaq::coredal::Component* c)
-      {
+      is_enabled(const dunedaq::coredal::Component* c) {
         return (m_disabled.find(&c->UID()) == m_disabled.end());
       }
 

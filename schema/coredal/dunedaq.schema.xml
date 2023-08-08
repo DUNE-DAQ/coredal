@@ -80,7 +80,7 @@
 
 <oks-schema>
 
-<info name="" type="" num-of-items="29" oks-format="schema" oks-version="oks-08-03-04-1-gf920aa4 built &quot;May 12 2022&quot;" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20230804T112346"/>
+<info name="" type="" num-of-items="29" oks-format="schema" oks-version="oks-08-03-04-1-gf920aa4 built &quot;May 12 2022&quot;" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20230808T093210"/>
 
  <class name="Application" description="A software executable" is-abstract="yes">
   <attribute name="application_name" description="Name of the application binary to run." type="string" is-not-null="yes"/>
@@ -94,7 +94,7 @@
    <method-implementation language="c++" prototype="void get_parents(const dunedaq::coredal::Session&amp; session, std::list&lt; std::vector&lt;const dunedaq::coredal::Component *&gt; &gt;&amp; parents) const" body=""/>
   </method>
   <method name="disabled" description="The algorithm checks if the segment / resource is disabled in the partition that uses it.&#xA;@param partition      partition object containing this resource or segment&#xA;">
-   <method-implementation language="c++" prototype="bool disabled(const dunedaq::coredal::Session&amp; session, bool skip_check = false) const" body=""/>
+   <method-implementation language="c++" prototype="bool disabled(const dunedaq::coredal::Session&amp; session) const" body=""/>
   </method>
   <method name="why_disabled" description="">
    <method-implementation language="java" prototype="String why_disabled(Partition partition, String prefix, boolean full_report) throws config.GenericException, config.SystemException, config.NotFoundException, config.NotValidException" body="return partition.resources().why_disabled(this, prefix, full_report);"/>
@@ -211,8 +211,8 @@
  <class name="Segment" description="Logical sub division of the configuration that can be enabled/disabled as a group">
   <superclass name="ResourceBase"/>
   <relationship name="segments" description="Nested list of Segments that form part of this Segment" class-type="Segment" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
-  <relationship name="applications" description="List of Applications that run in this Segment" class-type="Application" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
-  <relationship name="controller" description="This Segment&apos;s run controller. If not set, Segment is controlled by controller of parent Segment/Session" class-type="RCApplication" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="applications" description="List of Applications that run in this Segment" class-type="Application" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="yes" is-dependent="yes"/>
+  <relationship name="controller" description="This Segment&apos;s run controller." class-type="RCApplication" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="yes" is-dependent="yes"/>
   <relationship name="resources" class-type="ResourceSet" low-cc="zero" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
   <method name="get_base_segment" description="">
    <method-implementation language="c++" prototype="const Segment * get_base_segment() const" body=""/>
