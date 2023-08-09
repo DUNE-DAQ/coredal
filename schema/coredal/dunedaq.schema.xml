@@ -80,7 +80,7 @@
 
 <oks-schema>
 
-<info name="" type="" num-of-items="29" oks-format="schema" oks-version="oks-08-03-04-1-gf920aa4 built &quot;May 12 2022&quot;" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20230808T155647"/>
+<info name="" type="" num-of-items="29" oks-format="schema" oks-version="oks-08-03-04-1-gf920aa4 built &quot;May 12 2022&quot;" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20230809T110317"/>
 
  <class name="Application" description="A software executable" is-abstract="yes">
   <attribute name="application_name" description="Name of the application binary to run." type="string" is-not-null="yes"/>
@@ -95,9 +95,6 @@
   </method>
   <method name="disabled" description="The algorithm checks if the segment / resource is disabled in the partition that uses it.&#xA;@param partition      partition object containing this resource or segment&#xA;">
    <method-implementation language="c++" prototype="bool disabled(const dunedaq::coredal::Session&amp; session) const" body=""/>
-  </method>
-  <method name="why_disabled" description="">
-   <method-implementation language="java" prototype="String why_disabled(Partition partition, String prefix, boolean full_report) throws config.GenericException, config.SystemException, config.NotFoundException, config.NotValidException" body="return partition.resources().why_disabled(this, prefix, full_report);"/>
   </method>
  </class>
 
@@ -189,9 +186,6 @@
 
  <class name="ResourceBase">
   <superclass name="Component"/>
-  <method name="get_resources" description="Returns list of resources including those defined by the nested sets. If the session parameter is provided (i.e. it is not &lt;b&gt;null&lt;/b&gt;), only enabled resources are added.">
-   <method-implementation language="c++" prototype="void get_resources(oksdbinterfaces::Configuration&amp; db, std::list&lt;const Resource *&gt;&amp; out, const Session * session = 0) const" body=""/>
-  </method>
  </class>
 
  <class name="ResourceSet">
@@ -212,9 +206,6 @@
   <relationship name="segments" description="Nested list of Segments that form part of this Segment" class-type="Segment" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
   <relationship name="applications" description="List of Applications that run in this Segment" class-type="Application" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="yes" is-dependent="yes"/>
   <relationship name="controller" description="This Segment&apos;s run controller." class-type="RCApplication" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="yes" is-dependent="yes"/>
-  <method name="get_base_segment" description="">
-   <method-implementation language="c++" prototype="const Segment * get_base_segment() const" body=""/>
-  </method>
  </class>
 
  <class name="Service">
