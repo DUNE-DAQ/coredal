@@ -80,7 +80,7 @@
 
 <oks-schema>
 
-<info name="" type="" num-of-items="35" oks-format="schema" oks-version="862f2957270" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20231004T092718"/>
+<info name="" type="" num-of-items="40" oks-format="schema" oks-version="862f2957270" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20231005T144556"/>
 
  <class name="Application" description="A software executable" is-abstract="yes">
   <attribute name="application_name" description="Name of the application binary to run." type="string" is-not-null="yes"/>
@@ -163,12 +163,12 @@
  </class>
 
  <class name="FSMtransition">
-  <attribute name="trigger" type="string" is-not-null="yes"/>
-  <attribute name="source" type="string" is-not-null="yes"/>
+  <attribute name="source" description="Source state" type="string" is-not-null="yes"/>
+  <attribute name="dest" description="Destination state" type="string" is-not-null="yes"/>
  </class>
 
  <class name="FSMxTransition">
-  <attribute name="transition" description="The main transition that this pre/pos transition applies to" type="string" is-not-null="yes"/>
+  <attribute name="transition" description="The main transition that this pre/post transition applies to" type="string" is-not-null="yes"/>
   <attribute name="order" type="string" is-multi-value="yes" is-not-null="yes"/>
   <attribute name="mandatory" type="string" is-multi-value="yes"/>
  </class>
