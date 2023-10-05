@@ -22,6 +22,19 @@ The **Application** class has attibutes defining the application's
  that prints out the environment for enabled applications in the
  **Session** is provided in the `scripts` directory.
 
+## ReadoutMap
+
+ ![ReadoutMap schema](ReadoutMap.png)
+
+ The **ReadoutMap** included here is currently a direct translation
+from the jsonnet schema in the `daqconf` package with the addition of
+a grouping class **ReadoutGroup**.
+
+ The **DROStreamConf** class inherits from **ResourceBase** allowing
+individual streams to be disabled.  **DROStreamConfs** are grouped
+into **ReadoutGroups** which inherit from **ResourceSetAND** so if all
+streams in a group are disabled the group itself is disabled.
+
 
 ## Notes
 
