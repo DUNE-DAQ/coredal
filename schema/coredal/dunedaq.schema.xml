@@ -80,7 +80,7 @@
 
 <oks-schema>
 
-<info name="" type="" num-of-items="29" oks-format="schema" oks-version="oks-08-03-04-1-gf920aa4 built &quot;May 12 2022&quot;" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20230809T110317"/>
+<info name="" type="" num-of-items="41" oks-format="schema" oks-version="862f2957270" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20231005T161001"/>
 
  <class name="Application" description="A software executable" is-abstract="yes">
   <attribute name="application_name" description="Name of the application binary to run." type="string" is-not-null="yes"/>
@@ -109,6 +109,13 @@
   <attribute name="threads" description="Number of worker threads (not the number of workers which are processes)" type="u16" init-value="1" is-not-null="yes"/>
  </class>
 
+ <class name="DROStreamConf">
+  <superclass name="ResourceBase"/>
+  <attribute name="src_id" type="u32" is-not-null="yes"/>
+  <relationship name="geo_id" class-type="GeoId" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
+  <relationship name="stream_params" class-type="StreamParameters" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
+ </class>
+
  <class name="DaqApplication">
   <superclass name="Application"/>
   <attribute name="application_name" description="Name of the application binary to run." type="string" init-value="daq_application" is-not-null="yes"/>
@@ -130,9 +137,52 @@
   <attribute name="op_env" description="Operational environment " type="string" init-value="swtest" is-not-null="yes"/>
  </class>
 
+ <class name="FSMCommand">
+  <attribute name="cmd" type="string" is-not-null="yes"/>
+  <attribute name="optional" type="bool" init-value="true" is-not-null="yes"/>
+ </class>
+
+ <class name="FSMconfiguration">
+  <attribute name="states" type="string" is-multi-value="yes" init-value="&quot;initial&quot;,&quot;configured&quot;" is-not-null="yes"/>
+  <attribute name="initial_state" type="string" init-value="initial" is-not-null="yes"/>
+  <relationship name="transitions" class-type="FSMtransition" low-cc="one" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="no"/>
+  <relationship name="command_sequences" class-type="FSMsequence" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="no"/>
+  <relationship name="pre_transitions" class-type="FSMxTransition" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="no"/>
+  <relationship name="post_transitions" class-type="FSMxTransition" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="no"/>
+  <relationship name="interfaces" class-type="FSMinterface" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="no"/>
+ </class>
+
+ <class name="FSMinterface">
+  <attribute name="name" type="string" is-not-null="yes"/>
+  <attribute name="commands" type="string" is-multi-value="yes"/>
+ </class>
+
+ <class name="FSMsequence">
+  <attribute name="name" type="string" is-multi-value="yes" is-not-null="yes"/>
+  <relationship name="sequence" class-type="FSMCommand" low-cc="one" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="no"/>
+ </class>
+
+ <class name="FSMtransition">
+  <attribute name="source" description="Source state" type="string" is-not-null="yes"/>
+  <attribute name="dest" description="Destination state" type="string" is-not-null="yes"/>
+ </class>
+
+ <class name="FSMxTransition">
+  <attribute name="transition" description="The main transition that this pre/post transition applies to" type="string" is-not-null="yes"/>
+  <attribute name="order" type="string" is-multi-value="yes" is-not-null="yes"/>
+  <attribute name="mandatory" type="string" is-multi-value="yes"/>
+ </class>
+
  <class name="GenericService">
   <superclass name="Service"/>
   <attribute name="uri" type="string" is-not-null="yes"/>
+ </class>
+
+ <class name="GeoId">
+  <attribute name="detector_id" type="u32" is-not-null="yes"/>
+  <attribute name="crate_id" type="u32" is-not-null="yes"/>
+  <attribute name="slot_id" type="u32" is-not-null="yes"/>
+  <attribute name="stream_id" type="u32" is-not-null="yes"/>
  </class>
 
  <class name="HostComponent" is-abstract="yes">
@@ -178,6 +228,22 @@
  <class name="RCApplication" description="An executable which allows users to control datataking">
   <superclass name="Application"/>
   <attribute name="application_name" type="string" init-value="controller" is-not-null="yes"/>
+  <relationship name="fsm" class-type="FSMconfiguration" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="broadcaster" class-type="RCBroadcatser" low-cc="zero" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="no"/>
+ </class>
+
+ <class name="RCBroadcatser">
+  <attribute name="type" type="enum" range="kafka,undefined" init-value="kafka" is-not-null="yes"/>
+  <attribute name="address" type="string" init-value="monkafka.cern.ch:30092"/>
+  <attribute name="publish_timeout" type="u32" init-value="2" is-not-null="yes"/>
+ </class>
+
+ <class name="ReadoutGroup" description="The ReadoutGroup class should contain a set of DROStreamConf objects that describe the readout streams of the detector modul">
+  <superclass name="ResourceSetAND"/>
+ </class>
+
+ <class name="ReadoutMap">
+  <relationship name="groups" class-type="ReadoutGroup" low-cc="one" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
  </class>
 
  <class name="Resource">
@@ -224,6 +290,7 @@
   <relationship name="segment" description="List of configuration Segments that form this Session" class-type="Segment" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
   <relationship name="services" class-type="Service" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
   <relationship name="detector_configuration" class-type="DetectorConfig" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
+  <relationship name="readout_map" class-type="ReadoutMap" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
   <method name="get_all_applications" description="Returns applications defined in the Session and all of its Segments.">
    <method-implementation language="c++" prototype="std::vector&lt;const dunedaq::coredal::Application *&gt; get_all_applications() const" body=""/>
   </method>
@@ -238,6 +305,10 @@
  <class name="StorageDevice">
   <superclass name="HostComponent"/>
   <attribute name="storage" description="Amount of disk storage available for output data on this host in GB" type="u32" init-value="0" is-not-null="yes"/>
+ </class>
+
+ <class name="StreamParameters">
+  <attribute name="mode" type="enum" range="fix_rate,var_rate" init-value="fix_rate" is-not-null="yes"/>
  </class>
 
  <class name="Variable" description="A Variable associates a value with string name. It is used for process environment and database strings substitution.">
