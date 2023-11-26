@@ -54,7 +54,4 @@ that these resources are indeed associated with the VirtualHost by
 comparing with those listed in its `hw_resources` relationship.
 
 ### NetworkConnection
-
-  Contains a `uri` attribute for compatability with existing `moo`
-  schema. Hope that `protocol` and `port` can be used to construct a
-  uri with an address derived from the `Host`'s `NetworkInterface`s.
+  Describes the connection type and points to the **Service** running over this connection.
