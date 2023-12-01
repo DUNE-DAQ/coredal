@@ -100,6 +100,9 @@
  </class>
 
  <class name="Connection" is-abstract="yes">
+  <method name="get_data_type" description="Get the data type from one of the derived classes">
+   <method-implementation language="c++" prototype="std::string get_data_type() const" body=""/>
+  </method>
  </class>
 
  <class name="ConnectionService">
