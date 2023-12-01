@@ -100,7 +100,6 @@
  </class>
 
  <class name="Connection" is-abstract="yes">
-  <attribute name="data_type" type="string" is-not-null="yes"/>
  </class>
 
  <class name="ConnectionService">
@@ -213,6 +212,7 @@
 
  <class name="Queue">
   <superclass name="Connection"/>
+  <attribute name="data_type" type="string" is-not-null="yes"/>
   <attribute name="capacity" type="u32" init-value="10" is-not-null="yes"/>
   <attribute name="queue_type" description="Type of queue" type="enum" range="kUnknown,kStdDeQueue,kFollySPSCQueue,kFollyMPMCQueue" init-value="kFollySPSCQueue" is-not-null="yes"/>
  </class>
@@ -267,7 +267,7 @@
  </class>
 
  <class name="Service">
-  <attribute name="type" type="string" init-value="RCCommand" is-not-null="yes"/>
+  <attribute name="data_type" type="string" is-not-null="yes"/>
   <attribute name="protocol" type="string" init-value="tcp" is-not-null="yes"/>
   <attribute name="port" type="u16" init-value="5000"/>
   <attribute name="eth_device_name" type="string" init-value=""/>
