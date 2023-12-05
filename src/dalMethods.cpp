@@ -10,16 +10,12 @@
 
 #include "coredal/Application.hpp"
 #include "coredal/Component.hpp"
-#include "coredal/Connection.hpp"
 #include "coredal/DaqApplication.hpp"
 #include "coredal/DaqModule.hpp"
-#include "coredal/NetworkConnection.hpp"
-#include "coredal/Queue.hpp"
 #include "coredal/Resource.hpp"
 #include "coredal/ResourceSetAND.hpp"
 #include "coredal/ResourceSetOR.hpp"
 #include "coredal/Segment.hpp"
-#include "coredal/Service.hpp"
 #include "coredal/Session.hpp"
 
 #include "test_circular_dependency.hpp"
@@ -166,18 +162,6 @@ Session::get_all_applications() const {
   return apps;
 }
 
-// ========================================================================
-std::string Connection::get_data_type() const {
-  auto netCon = cast<NetworkConnection>();
-  if (netCon) {
-    return netCon->get_associated_service()->get_data_type();
-  }
-  auto queue = cast<Queue>();
-  if (queue) {
-    return queue->get_data_type();
-  }
-  return "";
-}
 // ========================================================================
 
 std::set<const HostComponent*>
