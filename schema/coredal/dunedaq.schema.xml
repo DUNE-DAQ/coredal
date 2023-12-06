@@ -80,7 +80,7 @@
 
 <oks-schema>
 
-<info name="" type="" num-of-items="41" oks-format="schema" oks-version="862f2957270" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20231005T161001"/>
+<info name="" type="" num-of-items="40" oks-format="schema" oks-version="862f2957270" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20231205T142704"/>
 
  <class name="Application" description="A software executable" is-abstract="yes">
   <attribute name="application_name" description="Name of the application binary to run." type="string" is-not-null="yes"/>
@@ -100,6 +100,7 @@
  </class>
 
  <class name="Connection" is-abstract="yes">
+  <attribute name="data_type" description="String identifying the data that travel through this connection. This can be used to match up the endpoints of this connection." type="string" is-not-null="yes"/>
  </class>
 
  <class name="ConnectionService">
@@ -212,7 +213,6 @@
 
  <class name="Queue">
   <superclass name="Connection"/>
-  <attribute name="data_type" type="string" is-not-null="yes"/>
   <attribute name="capacity" type="u32" init-value="10" is-not-null="yes"/>
   <attribute name="queue_type" description="Type of queue" type="enum" range="kUnknown,kStdDeQueue,kFollySPSCQueue,kFollyMPMCQueue" init-value="kFollySPSCQueue" is-not-null="yes"/>
  </class>
@@ -267,7 +267,6 @@
  </class>
 
  <class name="Service">
-  <attribute name="data_type" type="string" is-not-null="yes"/>
   <attribute name="protocol" type="string" init-value="tcp" is-not-null="yes"/>
   <attribute name="port" type="u16" init-value="5000"/>
   <attribute name="eth_device_name" type="string" init-value=""/>
