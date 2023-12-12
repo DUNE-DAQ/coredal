@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="ASCII"?>
+
+<!-- oks-data version 2.2 -->
+
+
+<!DOCTYPE oks-data [
+  <!ELEMENT oks-data (info, (include)?, (comments)?, (obj)+)>
+  <!ELEMENT info EMPTY>
+  <!ATTLIST info
+      name CDATA #IMPLIED
+      type CDATA #IMPLIED
+      num-of-items CDATA #REQUIRED
+      oks-format CDATA #FIXED "data"
+      oks-version CDATA #REQUIRED
+      created-by CDATA #IMPLIED
+      created-on CDATA #IMPLIED
+      creation-time CDATA #IMPLIED
+      last-modified-by CDATA #IMPLIED
+      last-modified-on CDATA #IMPLIED
+      last-modification-time CDATA #IMPLIED
+  >
+  <!ELEMENT include (file)*>
+  <!ELEMENT file EMPTY>
+  <!ATTLIST file
+      path CDATA #REQUIRED
+  >
+  <!ELEMENT comments (comment)*>
+  <!ELEMENT comment EMPTY>
+  <!ATTLIST comment
+      creation-time CDATA #REQUIRED
+      created-by CDATA #REQUIRED
+      created-on CDATA #REQUIRED
+      author CDATA #REQUIRED
+      text CDATA #REQUIRED
+  >
+  <!ELEMENT obj (attr | rel)*>
+  <!ATTLIST obj
+      class CDATA #REQUIRED
+      id CDATA #REQUIRED
+  >
+  <!ELEMENT attr (data)*>
+  <!ATTLIST attr
+      name CDATA #REQUIRED
+      type (bool|s8|u8|s16|u16|s32|u32|s64|u64|float|double|date|time|string|uid|enum|class|-) "-"
+      val CDATA ""
+  >
+  <!ELEMENT data EMPTY>
+  <!ATTLIST data
+      val CDATA #REQUIRED
+  >
+  <!ELEMENT rel (ref)*>
+  <!ATTLIST rel
+      name CDATA #REQUIRED
+      class CDATA ""
+      id CDATA ""
+  >
+  <!ELEMENT ref EMPTY>
+  <!ATTLIST ref
+      class CDATA #REQUIRED
+      id CDATA #REQUIRED
+  >
+]>
+
+<oks-data>
+
+<info name="" type="" num-of-items="60" oks-format="data" oks-version="oks-08-03-04-11-g3f5bde7 built &quot;Feb 21 2023&quot;" created-by="glehmann" created-on="lxplus940.cern.ch" creation-time="20231212T153805" last-modified-by="glehmann" last-modified-on="lxplus940.cern.ch" last-modification-time="20231212T153805"/>
+
+<obj class="ALink" id="DROStreamConf-2-StreamParameters-via-stream_params">
+ <attr name="Name" type="string" val="stream_params"/>
+ <rel name="From" class="Class" id="DROStreamConf"/>
+ <rel name="To" class="Class" id="StreamParameters"/>
+ <rel name="Points">
+  <ref class="Point" id="1 DROStreamConf-2-StreamParameters-via-stream_params"/>
+  <ref class="Point" id="2 DROStreamConf-2-StreamParameters-via-stream_params"/>
+  <ref class="Point" id="3 DROStreamConf-2-StreamParameters-via-stream_params"/>
+  <ref class="Point" id="4 DROStreamConf-2-StreamParameters-via-stream_params"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="ReadoutMap-2-ReadoutGroup-via-groups">
+ <attr name="Name" type="string" val="groups"/>
+ <rel name="From" class="Class" id="ReadoutMap"/>
+ <rel name="To" class="Class" id="ReadoutGroup"/>
+ <rel name="Points">
+  <ref class="Point" id="1 ReadoutMap-2-ReadoutGroup-via-groups"/>
+  <ref class="Point" id="2 ReadoutMap-2-ReadoutGroup-via-groups"/>
+  <ref class="Point" id="3 ReadoutMap-2-ReadoutGroup-via-groups"/>
+  <ref class="Point" id="4 ReadoutMap-2-ReadoutGroup-via-groups"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="ResourceSet-2-ResourceBase-via-contains">
+ <attr name="Name" type="string" val="contains"/>
+ <rel name="From" class="Class" id="ResourceSet"/>
+ <rel name="To" class="Class" id="ResourceBase"/>
+ <rel name="Points">
+  <ref class="Point" id="1 ResourceSet-2-ResourceBase-via-contains"/>
+  <ref class="Point" id="2 ResourceSet-2-ResourceBase-via-contains"/>
+  <ref class="Point" id="3 ResourceSet-2-ResourceBase-via-contains"/>
+  <ref class="Point" id="4 ResourceSet-2-ResourceBase-via-contains"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="Session-2-ReadoutMap-via-readout_map">
+ <attr name="Name" type="string" val="readout_map"/>
+ <rel name="From" class="Class" id="Session"/>
+ <rel name="To" class="Class" id="ReadoutMap"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Session-2-ReadoutMap-via-readout_map"/>
+  <ref class="Point" id="2 Session-2-ReadoutMap-via-readout_map"/>
+  <ref class="Point" id="3 Session-2-ReadoutMap-via-readout_map"/>
+  <ref class="Point" id="4 Session-2-ReadoutMap-via-readout_map"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="Session-2-ResourceBase-via-disabled">
+ <attr name="Name" type="string" val="disabled"/>
+ <rel name="From" class="Class" id="Session"/>
+ <rel name="To" class="Class" id="ResourceBase"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Session-2-ResourceBase-via-disabled"/>
+  <ref class="Point" id="2 Session-2-ResourceBase-via-disabled"/>
+  <ref class="Point" id="3 Session-2-ResourceBase-via-disabled"/>
+  <ref class="Point" id="4 Session-2-ResourceBase-via-disabled"/>
+ </rel>
+</obj>
+
+<obj class="Class" id="DROStreamConf">
+ <attr name="x" type="s16" val="930"/>
+ <attr name="y" type="s16" val="54"/>
+</obj>
+
+<obj class="Class" id="ReadoutGroup">
+ <attr name="x" type="s16" val="659"/>
+ <attr name="y" type="s16" val="324"/>
+</obj>
+
+<obj class="Class" id="ReadoutInterface">
+ <attr name="x" type="s16" val="935"/>
+ <attr name="y" type="s16" val="364"/>
+</obj>
+
+<obj class="Class" id="ReadoutMap">
+ <attr name="x" type="s16" val="573"/>
+ <attr name="y" type="s16" val="180"/>
+</obj>
+
+<obj class="Class" id="ResourceBase">
+ <attr name="x" type="s16" val="770"/>
+ <attr name="y" type="s16" val="110"/>
+</obj>
+
+<obj class="Class" id="ResourceSet">
+ <attr name="x" type="s16" val="873"/>
+ <attr name="y" type="s16" val="171"/>
+</obj>
+
+<obj class="Class" id="ResourceSetAND">
+ <attr name="x" type="s16" val="778"/>
+ <attr name="y" type="s16" val="255"/>
+</obj>
+
+<obj class="Class" id="Session">
+ <attr name="x" type="s16" val="88"/>
+ <attr name="y" type="s16" val="83"/>
+</obj>
+
+<obj class="Class" id="StreamParameters">
+ <attr name="x" type="s16" val="1136"/>
+ <attr name="y" type="s16" val="49"/>
+</obj>
+
+<obj class="GLink" id="ResourceBase-2-DROStreamConf">
+ <rel name="From" class="Class" id="ResourceBase"/>
+ <rel name="To" class="Class" id="DROStreamConf"/>
+ <rel name="Points">
+  <ref class="Point" id="1 ResourceBase-2-DROStreamConf"/>
+  <ref class="Point" id="2 ResourceBase-2-DROStreamConf"/>
+  <ref class="Point" id="3 ResourceBase-2-DROStreamConf"/>
+  <ref class="Point" id="4 ResourceBase-2-DROStreamConf"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="ResourceBase-2-ResourceSet">
+ <rel name="From" class="Class" id="ResourceBase"/>
+ <rel name="To" class="Class" id="ResourceSet"/>
+ <rel name="Points">
+  <ref class="Point" id="1 ResourceBase-2-ResourceSet"/>
+  <ref class="Point" id="2 ResourceBase-2-ResourceSet"/>
+  <ref class="Point" id="3 ResourceBase-2-ResourceSet"/>
+  <ref class="Point" id="4 ResourceBase-2-ResourceSet"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="ResourceSet-2-ResourceSetAND">
+ <rel name="From" class="Class" id="ResourceSet"/>
+ <rel name="To" class="Class" id="ResourceSetAND"/>
+ <rel name="Points">
+  <ref class="Point" id="1 ResourceSet-2-ResourceSetAND"/>
+  <ref class="Point" id="2 ResourceSet-2-ResourceSetAND"/>
+  <ref class="Point" id="3 ResourceSet-2-ResourceSetAND"/>
+  <ref class="Point" id="4 ResourceSet-2-ResourceSetAND"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="ResourceSetAND-2-ReadoutGroup">
+ <rel name="From" class="Class" id="ResourceSetAND"/>
+ <rel name="To" class="Class" id="ReadoutGroup"/>
+ <rel name="Points">
+  <ref class="Point" id="1 ResourceSetAND-2-ReadoutGroup"/>
+  <ref class="Point" id="2 ResourceSetAND-2-ReadoutGroup"/>
+  <ref class="Point" id="3 ResourceSetAND-2-ReadoutGroup"/>
+  <ref class="Point" id="4 ResourceSetAND-2-ReadoutGroup"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="ResourceSetAND-2-ReadoutInterface">
+ <rel name="From" class="Class" id="ResourceSetAND"/>
+ <rel name="To" class="Class" id="ReadoutInterface"/>
+ <rel name="Points">
+  <ref class="Point" id="1 ResourceSetAND-2-ReadoutInterface"/>
+  <ref class="Point" id="2 ResourceSetAND-2-ReadoutInterface"/>
+  <ref class="Point" id="3 ResourceSetAND-2-ReadoutInterface"/>
+  <ref class="Point" id="4 ResourceSetAND-2-ReadoutInterface"/>
+ </rel>
+</obj>
+
+<obj class="Point" id="1 DROStreamConf-2-StreamParameters-via-stream_params">
+ <attr name="x" type="s16" val="75"/>
+ <attr name="y" type="s16" val="38"/>
+</obj>
+
+<obj class="Point" id="1 ReadoutMap-2-ReadoutGroup-via-groups">
+ <attr name="x" type="s16" val="60"/>
+ <attr name="y" type="s16" val="24"/>
+</obj>
+
+<obj class="Point" id="1 ResourceBase-2-DROStreamConf">
+ <attr name="x" type="s16" val="68"/>
+ <attr name="y" type="s16" val="24"/>
+</obj>
+
+<obj class="Point" id="1 ResourceBase-2-ResourceSet">
+ <attr name="x" type="s16" val="68"/>
+ <attr name="y" type="s16" val="24"/>
+</obj>
+
+<obj class="Point" id="1 ResourceSet-2-ResourceBase-via-contains">
+ <attr name="x" type="s16" val="60"/>
+ <attr name="y" type="s16" val="24"/>
+</obj>
+
+<obj class="Point" id="1 ResourceSet-2-ResourceSetAND">
+ <attr name="x" type="s16" val="60"/>
+ <attr name="y" type="s16" val="24"/>
+</obj>
+
+<obj class="Point" id="1 ResourceSetAND-2-ReadoutGroup">
+ <attr name="x" type="s16" val="81"/>
+ <attr name="y" type="s16" val="24"/>
+</obj>
+
+<obj class="Point" id="1 ResourceSetAND-2-ReadoutInterface">
+ <attr name="x" type="s16" val="81"/>
+ <attr name="y" type="s16" val="24"/>
+</obj>
+
+<obj class="Point" id="1 Session-2-ReadoutMap-via-readout_map">
+ <attr name="x" type="s16" val="204"/>
+ <attr name="y" type="s16" val="146"/>
+</obj>
+
+<obj class="Point" id="1 Session-2-ResourceBase-via-disabled">
+ <attr name="x" type="s16" val="204"/>
+ <attr name="y" type="s16" val="146"/>
+</obj>
+
+<obj class="Point" id="2 DROStreamConf-2-StreamParameters-via-stream_params">
+ <attr name="x" type="s16" val="75"/>
+ <attr name="y" type="s16" val="60"/>
+</obj>
+
+<obj class="Point" id="2 ReadoutMap-2-ReadoutGroup-via-groups">
+ <attr name="x" type="s16" val="60"/>
+ <attr name="y" type="s16" val="339"/>
+</obj>
+
+<obj class="Point" id="2 ResourceBase-2-DROStreamConf">
+ <attr name="x" type="s16" val="68"/>
+ <attr name="y" type="s16" val="68"/>
+</obj>
+
+<obj class="Point" id="2 ResourceBase-2-ResourceSet">
+ <attr name="x" type="s16" val="68"/>
+ <attr name="y" type="s16" val="126"/>
+</obj>
+
+<obj class="Point" id="2 ResourceSet-2-ResourceBase-via-contains">
+ <attr name="x" type="s16" val="60"/>
+ <attr name="y" type="s16" val="185"/>
+</obj>
+
+<obj class="Point" id="2 ResourceSet-2-ResourceSetAND">
+ <attr name="x" type="s16" val="60"/>
+ <attr name="y" type="s16" val="227"/>
+</obj>
+
+<obj class="Point" id="2 ResourceSetAND-2-ReadoutGroup">
+ <attr name="x" type="s16" val="81"/>
+ <attr name="y" type="s16" val="264"/>
+</obj>
+
+<obj class="Point" id="2 ResourceSetAND-2-ReadoutInterface">
+ <attr name="x" type="s16" val="81"/>
+ <attr name="y" type="s16" val="264"/>
+</obj>
+
+<obj class="Point" id="2 Session-2-ReadoutMap-via-readout_map">
+ <attr name="x" type="s16" val="204"/>
+ <attr name="y" type="s16" val="131"/>
+</obj>
+
+<obj class="Point" id="2 Session-2-ResourceBase-via-disabled">
+ <attr name="x" type="s16" val="204"/>
+ <attr name="y" type="s16" val="96"/>
+</obj>
+
+<obj class="Point" id="3 DROStreamConf-2-StreamParameters-via-stream_params">
+ <attr name="x" type="s16" val="34"/>
+ <attr name="y" type="s16" val="60"/>
+</obj>
+
+<obj class="Point" id="3 ReadoutMap-2-ReadoutGroup-via-groups">
+ <attr name="x" type="s16" val="22"/>
+ <attr name="y" type="s16" val="339"/>
+</obj>
+
+<obj class="Point" id="3 ResourceBase-2-DROStreamConf">
+ <attr name="x" type="s16" val="25"/>
+ <attr name="y" type="s16" val="68"/>
+</obj>
+
+<obj class="Point" id="3 ResourceBase-2-ResourceSet">
+ <attr name="x" type="s16" val="20"/>
+ <attr name="y" type="s16" val="126"/>
+</obj>
+
+<obj class="Point" id="3 ResourceSet-2-ResourceBase-via-contains">
+ <attr name="x" type="s16" val="22"/>
+ <attr name="y" type="s16" val="185"/>
+</obj>
+
+<obj class="Point" id="3 ResourceSet-2-ResourceSetAND">
+ <attr name="x" type="s16" val="27"/>
+ <attr name="y" type="s16" val="227"/>
+</obj>
+
+<obj class="Point" id="3 ResourceSetAND-2-ReadoutGroup">
+ <attr name="x" type="s16" val="22"/>
+ <attr name="y" type="s16" val="264"/>
+</obj>
+
+<obj class="Point" id="3 ResourceSetAND-2-ReadoutInterface">
+ <attr name="x" type="s16" val="26"/>
+ <attr name="y" type="s16" val="264"/>
+</obj>
+
+<obj class="Point" id="3 Session-2-ReadoutMap-via-readout_map">
+ <attr name="x" type="s16" val="20"/>
+ <attr name="y" type="s16" val="131"/>
+</obj>
+
+<obj class="Point" id="3 Session-2-ResourceBase-via-disabled">
+ <attr name="x" type="s16" val="22"/>
+ <attr name="y" type="s16" val="96"/>
+</obj>
+
+<obj class="Point" id="4 DROStreamConf-2-StreamParameters-via-stream_params">
+ <attr name="x" type="s16" val="34"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 ReadoutMap-2-ReadoutGroup-via-groups">
+ <attr name="x" type="s16" val="22"/>
+ <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="Point" id="4 ResourceBase-2-DROStreamConf">
+ <attr name="x" type="s16" val="25"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 ResourceBase-2-ResourceSet">
+ <attr name="x" type="s16" val="20"/>
+ <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="Point" id="4 ResourceSet-2-ResourceBase-via-contains">
+ <attr name="x" type="s16" val="22"/>
+ <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="Point" id="4 ResourceSet-2-ResourceSetAND">
+ <attr name="x" type="s16" val="27"/>
+ <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="Point" id="4 ResourceSetAND-2-ReadoutGroup">
+ <attr name="x" type="s16" val="22"/>
+ <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="Point" id="4 ResourceSetAND-2-ReadoutInterface">
+ <attr name="x" type="s16" val="26"/>
+ <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="Point" id="4 Session-2-ReadoutMap-via-readout_map">
+ <attr name="x" type="s16" val="20"/>
+ <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="Point" id="4 Session-2-ResourceBase-via-disabled">
+ <attr name="x" type="s16" val="22"/>
+ <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="View" id="Unknown">
+ <attr name="drawing area x margin" type="u16" val="6"/>
+ <attr name="drawing area y margin" type="u16" val="4"/>
+ <attr name="font x margin" type="u16" val="3"/>
+ <attr name="font y margin" type="u16" val="2"/>
+ <attr name="font name" type="string" val="-adobe-helvetica-medium-r-normal--12-120-75-75-p-67-iso8859-1"/>
+ <attr name="aggregation sign size" type="u16" val="18"/>
+ <attr name="generalization sign size" type="u16" val="16"/>
+</obj>
+
+</oks-data>

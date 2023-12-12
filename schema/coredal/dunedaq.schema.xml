@@ -80,7 +80,7 @@
 
 <oks-schema>
 
-<info name="" type="" num-of-items="40" oks-format="schema" oks-version="862f2957270" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20231205T142704"/>
+<info name="" type="" num-of-items="41" oks-format="schema" oks-version="oks-08-03-04-11-g3f5bde7 built &quot;Feb 21 2023&quot;" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="glehmann" last-modified-on="lxplus940.cern.ch" last-modification-time="20231212T154733"/>
 
  <class name="Application" description="A software executable" is-abstract="yes">
   <attribute name="application_name" description="Name of the application binary to run." type="string" is-not-null="yes"/>
@@ -230,7 +230,11 @@
   <attribute name="publish_timeout" type="u32" init-value="2" is-not-null="yes"/>
  </class>
 
- <class name="ReadoutGroup" description="The ReadoutGroup class should contain a set of DROStreamConf objects that describe the readout streams of the detector modul">
+ <class name="ReadoutGroup" description="The ReadoutGroup class should contain a set of ReadoutInterface objects that describe the readout streams of the detector module handled by a single interface..">
+  <superclass name="ResourceSetAND"/>
+ </class>
+
+ <class name="ReadoutInterface" description="The ReadoutInterface contains a set of DROStreamConf objects that represent the detector data streams handled by that interface.">
   <superclass name="ResourceSetAND"/>
  </class>
 
@@ -269,7 +273,7 @@
  <class name="Service">
   <attribute name="protocol" type="string" init-value="tcp" is-not-null="yes"/>
   <attribute name="port" type="u16" init-value="5000"/>
-  <attribute name="eth_device_name" type="string" init-value=""/>
+  <attribute name="eth_device_name" type="string"/>
  </class>
 
  <class name="Session">
