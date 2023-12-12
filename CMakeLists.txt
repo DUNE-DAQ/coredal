@@ -16,7 +16,7 @@ find_package(oksdbinterfaces REQUIRED)
 #find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 ##############################################################################
-
+include_directories(${CMAKE_BINARY_DIR}/coredal)
 daq_oks_codegen(dunedaq.schema.xml)
 
 daq_add_library(dalMethods.cpp

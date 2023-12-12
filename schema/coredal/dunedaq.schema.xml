@@ -80,13 +80,14 @@
 
 <oks-schema>
 
-<info name="" type="" num-of-items="41" oks-format="schema" oks-version="862f2957270" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20231005T161001"/>
+<info name="" type="" num-of-items="40" oks-format="schema" oks-version="862f2957270" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20231205T142704"/>
 
  <class name="Application" description="A software executable" is-abstract="yes">
   <attribute name="application_name" description="Name of the application binary to run." type="string" is-not-null="yes"/>
   <attribute name="commandline_parameters" description="command line parameters to add when starting the application" type="string"/>
   <relationship name="applicationEnvironment" description="Define process environment for this application." class-type="VariableBase" low-cc="zero" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
   <relationship name="runs_on" description="VirtualHost to run this application on" class-type="VirtualHost" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="exposes_service" description="Services exposed i.e. provided by this application" class-type="Service" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
  </class>
 
  <class name="Component" description="Abstract base class for Segment and Resource classes. It is only used to allow objects of derived classes to be put into list of disabled items. For more information read https://twiki.cern.ch/twiki/bin/viewauth/Atlas/DaqHltDal#3_4_Resource_Classes" is-abstract="yes">
@@ -99,13 +100,11 @@
  </class>
 
  <class name="Connection" is-abstract="yes">
-  <attribute name="data_type" type="string" is-not-null="yes"/>
+  <attribute name="data_type" description="String identifying the data that travel through this connection. This can be used to match up the endpoints of this connection." type="string" is-not-null="yes"/>
  </class>
 
  <class name="ConnectionService">
-  <superclass name="Service"/>
   <superclass name="Application"/>
-  <attribute name="port" type="u16" init-value="5000"/>
   <attribute name="threads" description="Number of worker threads (not the number of workers which are processes)" type="u16" init-value="1" is-not-null="yes"/>
  </class>
 
@@ -173,11 +172,6 @@
   <attribute name="mandatory" type="string" is-multi-value="yes"/>
  </class>
 
- <class name="GenericService">
-  <superclass name="Service"/>
-  <attribute name="uri" type="string" is-not-null="yes"/>
- </class>
-
  <class name="GeoId">
   <attribute name="detector_id" type="u32" is-not-null="yes"/>
   <attribute name="crate_id" type="u32" is-not-null="yes"/>
@@ -192,9 +186,7 @@
  <class name="NetworkConnection">
   <superclass name="Connection"/>
   <attribute name="connection_type" description="Type of the network connection " type="enum" range="kSendRecv,kPubSub" init-value="kSendRecv" is-not-null="yes"/>
-  <attribute name="protocol" description="Protocol of the connection tcp or udp" type="enum" range="tcp,udp" init-value="tcp" is-not-null="yes"/>
-  <attribute name="port" type="u16" is-not-null="yes"/>
-  <attribute name="uri" type="string" is-not-null="yes"/>
+  <relationship name="associated_service" description="Service provided by this connection" class-type="Service" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
  </class>
 
  <class name="NetworkDevice">
@@ -275,7 +267,9 @@
  </class>
 
  <class name="Service">
-  <attribute name="enabled" type="bool" init-value="true" is-not-null="yes"/>
+  <attribute name="protocol" type="string" init-value="tcp" is-not-null="yes"/>
+  <attribute name="port" type="u16" init-value="5000"/>
+  <attribute name="eth_device_name" type="string" init-value=""/>
  </class>
 
  <class name="Session">
@@ -288,7 +282,7 @@
   <relationship name="environment" description="Define process environment for any application run in given session." class-type="VariableBase" low-cc="zero" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
   <relationship name="disabled" description="Resources that should not participate in the current run" class-type="ResourceBase" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
   <relationship name="segment" description="List of configuration Segments that form this Session" class-type="Segment" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
-  <relationship name="services" class-type="Service" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <relationship name="infrastructure_applications" class-type="Application" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
   <relationship name="detector_configuration" class-type="DetectorConfig" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
   <relationship name="readout_map" class-type="ReadoutMap" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
   <method name="get_all_applications" description="Returns applications defined in the Session and all of its Segments.">
