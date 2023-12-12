@@ -1,0 +1,1453 @@
+<?xml version="1.0" encoding="ASCII"?>
+
+<!-- oks-data version 2.2 -->
+
+
+<!DOCTYPE oks-data [
+  <!ELEMENT oks-data (info, (include)?, (comments)?, (obj)+)>
+  <!ELEMENT info EMPTY>
+  <!ATTLIST info
+      name CDATA #IMPLIED
+      type CDATA #IMPLIED
+      num-of-items CDATA #REQUIRED
+      oks-format CDATA #FIXED "data"
+      oks-version CDATA #REQUIRED
+      created-by CDATA #IMPLIED
+      created-on CDATA #IMPLIED
+      creation-time CDATA #IMPLIED
+      last-modified-by CDATA #IMPLIED
+      last-modified-on CDATA #IMPLIED
+      last-modification-time CDATA #IMPLIED
+  >
+  <!ELEMENT include (file)*>
+  <!ELEMENT file EMPTY>
+  <!ATTLIST file
+      path CDATA #REQUIRED
+  >
+  <!ELEMENT comments (comment)*>
+  <!ELEMENT comment EMPTY>
+  <!ATTLIST comment
+      creation-time CDATA #REQUIRED
+      created-by CDATA #REQUIRED
+      created-on CDATA #REQUIRED
+      author CDATA #REQUIRED
+      text CDATA #REQUIRED
+  >
+  <!ELEMENT obj (attr | rel)*>
+  <!ATTLIST obj
+      class CDATA #REQUIRED
+      id CDATA #REQUIRED
+  >
+  <!ELEMENT attr (data)*>
+  <!ATTLIST attr
+      name CDATA #REQUIRED
+      type (bool|s8|u8|s16|u16|s32|u32|s64|u64|float|double|date|time|string|uid|enum|class|-) "-"
+      val CDATA ""
+  >
+  <!ELEMENT data EMPTY>
+  <!ATTLIST data
+      val CDATA #REQUIRED
+  >
+  <!ELEMENT rel (ref)*>
+  <!ATTLIST rel
+      name CDATA #REQUIRED
+      class CDATA ""
+      id CDATA ""
+  >
+  <!ELEMENT ref EMPTY>
+  <!ATTLIST ref
+      class CDATA #REQUIRED
+      id CDATA #REQUIRED
+  >
+]>
+
+<oks-data>
+
+<info name="" type="" num-of-items="226" oks-format="data" oks-version="cf3a4f0 built &quot;Aug 18 2023&quot;" created-by="gjc" created-on="thinkpad" creation-time="20231212T142206" last-modified-by="gjc" last-modified-on="thinkpad" last-modification-time="20231212T142206"/>
+
+<obj class="ALink" id="Application-2-Service-via-exposes_service">
+ <attr name="Name" type="string" val="exposes_service"/>
+ <rel name="From" class="Class" id="Application"/>
+ <rel name="To" class="Class" id="Service"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Application-2-Service-via-exposes_service"/>
+  <ref class="Point" id="2 Application-2-Service-via-exposes_service"/>
+  <ref class="Point" id="3 Application-2-Service-via-exposes_service"/>
+  <ref class="Point" id="4 Application-2-Service-via-exposes_service"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="Application-2-VariableBase-via-applicationEnvironment">
+ <attr name="Name" type="string" val="applicationEnvironment"/>
+ <rel name="From" class="Class" id="Application"/>
+ <rel name="To" class="Class" id="VariableBase"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Application-2-VariableBase-via-applicationEnvironment"/>
+  <ref class="Point" id="2 Application-2-VariableBase-via-applicationEnvironment"/>
+  <ref class="Point" id="3 Application-2-VariableBase-via-applicationEnvironment"/>
+  <ref class="Point" id="4 Application-2-VariableBase-via-applicationEnvironment"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="Application-2-VirtualHost-via-runs_on">
+ <attr name="Name" type="string" val="runs_on"/>
+ <rel name="From" class="Class" id="Application"/>
+ <rel name="To" class="Class" id="VirtualHost"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Application-2-VirtualHost-via-runs_on"/>
+  <ref class="Point" id="2 Application-2-VirtualHost-via-runs_on"/>
+  <ref class="Point" id="3 Application-2-VirtualHost-via-runs_on"/>
+  <ref class="Point" id="4 Application-2-VirtualHost-via-runs_on"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="DROStreamConf-2-GeoId-via-geo_id">
+ <attr name="Name" type="string" val="geo_id"/>
+ <rel name="From" class="Class" id="DROStreamConf"/>
+ <rel name="To" class="Class" id="GeoId"/>
+ <rel name="Points">
+  <ref class="Point" id="1 DROStreamConf-2-GeoId-via-geo_id"/>
+  <ref class="Point" id="2 DROStreamConf-2-GeoId-via-geo_id"/>
+  <ref class="Point" id="3 DROStreamConf-2-GeoId-via-geo_id"/>
+  <ref class="Point" id="4 DROStreamConf-2-GeoId-via-geo_id"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="DaqApplication-2-DaqModule-via-modules">
+ <attr name="Name" type="string" val="modules"/>
+ <rel name="From" class="Class" id="DaqApplication"/>
+ <rel name="To" class="Class" id="DaqModule"/>
+ <rel name="Points">
+  <ref class="Point" id="1 DaqApplication-2-DaqModule-via-modules"/>
+  <ref class="Point" id="2 DaqApplication-2-DaqModule-via-modules"/>
+  <ref class="Point" id="3 DaqApplication-2-DaqModule-via-modules"/>
+  <ref class="Point" id="4 DaqApplication-2-DaqModule-via-modules"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="DaqModule-2-Connection-via-inputs">
+ <attr name="Name" type="string" val="inputs"/>
+ <rel name="From" class="Class" id="DaqModule"/>
+ <rel name="To" class="Class" id="Connection"/>
+ <rel name="Points">
+  <ref class="Point" id="1 DaqModule-2-Connection-via-inputs"/>
+  <ref class="Point" id="2 DaqModule-2-Connection-via-inputs"/>
+  <ref class="Point" id="3 DaqModule-2-Connection-via-inputs"/>
+  <ref class="Point" id="4 DaqModule-2-Connection-via-inputs"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="DaqModule-2-Connection-via-outputs">
+ <attr name="Name" type="string" val="outputs"/>
+ <rel name="From" class="Class" id="DaqModule"/>
+ <rel name="To" class="Class" id="Connection"/>
+ <rel name="Points">
+  <ref class="Point" id="1 DaqModule-2-Connection-via-outputs"/>
+  <ref class="Point" id="2 DaqModule-2-Connection-via-outputs"/>
+  <ref class="Point" id="3 DaqModule-2-Connection-via-outputs"/>
+  <ref class="Point" id="4 DaqModule-2-Connection-via-outputs"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="DaqModule-2-HostComponent-via-used_resources">
+ <attr name="Name" type="string" val="used_resources"/>
+ <rel name="From" class="Class" id="DaqModule"/>
+ <rel name="To" class="Class" id="HostComponent"/>
+ <rel name="Points">
+  <ref class="Point" id="1 DaqModule-2-HostComponent-via-used_resources"/>
+  <ref class="Point" id="2 DaqModule-2-HostComponent-via-used_resources"/>
+  <ref class="Point" id="3 DaqModule-2-HostComponent-via-used_resources"/>
+  <ref class="Point" id="4 DaqModule-2-HostComponent-via-used_resources"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="NetworkConnection-2-Service-via-associated_service">
+ <attr name="Name" type="string" val="associated_service"/>
+ <rel name="From" class="Class" id="NetworkConnection"/>
+ <rel name="To" class="Class" id="Service"/>
+ <rel name="Points">
+  <ref class="Point" id="1 NetworkConnection-2-Service-via-associated_service"/>
+  <ref class="Point" id="2 NetworkConnection-2-Service-via-associated_service"/>
+  <ref class="Point" id="3 NetworkConnection-2-Service-via-associated_service"/>
+  <ref class="Point" id="4 NetworkConnection-2-Service-via-associated_service"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="NetworkDevice-2-NetworkInterface-via-network">
+ <attr name="Name" type="string" val="network"/>
+ <rel name="From" class="Class" id="NetworkDevice"/>
+ <rel name="To" class="Class" id="NetworkInterface"/>
+ <rel name="Points">
+  <ref class="Point" id="1 NetworkDevice-2-NetworkInterface-via-network"/>
+  <ref class="Point" id="2 NetworkDevice-2-NetworkInterface-via-network"/>
+  <ref class="Point" id="3 NetworkDevice-2-NetworkInterface-via-network"/>
+  <ref class="Point" id="4 NetworkDevice-2-NetworkInterface-via-network"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="PhysicalHost-2-HostComponent-via-contains">
+ <attr name="Name" type="string" val="contains"/>
+ <rel name="From" class="Class" id="PhysicalHost"/>
+ <rel name="To" class="Class" id="HostComponent"/>
+ <rel name="Points">
+  <ref class="Point" id="1 PhysicalHost-2-HostComponent-via-contains"/>
+  <ref class="Point" id="2 PhysicalHost-2-HostComponent-via-contains"/>
+  <ref class="Point" id="3 PhysicalHost-2-HostComponent-via-contains"/>
+  <ref class="Point" id="4 PhysicalHost-2-HostComponent-via-contains"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="ReadoutMap-2-ReadoutGroup-via-groups">
+ <attr name="Name" type="string" val="groups"/>
+ <rel name="From" class="Class" id="ReadoutMap"/>
+ <rel name="To" class="Class" id="ReadoutGroup"/>
+ <rel name="Points">
+  <ref class="Point" id="1 ReadoutMap-2-ReadoutGroup-via-groups"/>
+  <ref class="Point" id="2 ReadoutMap-2-ReadoutGroup-via-groups"/>
+  <ref class="Point" id="3 ReadoutMap-2-ReadoutGroup-via-groups"/>
+  <ref class="Point" id="4 ReadoutMap-2-ReadoutGroup-via-groups"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="ResourceSet-2-ResourceBase-via-contains">
+ <attr name="Name" type="string" val="contains"/>
+ <rel name="From" class="Class" id="ResourceSet"/>
+ <rel name="To" class="Class" id="ResourceBase"/>
+ <rel name="Points">
+  <ref class="Point" id="1 ResourceSet-2-ResourceBase-via-contains"/>
+  <ref class="Point" id="2 ResourceSet-2-ResourceBase-via-contains"/>
+  <ref class="Point" id="3 ResourceSet-2-ResourceBase-via-contains"/>
+  <ref class="Point" id="4 ResourceSet-2-ResourceBase-via-contains"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="Segment-2-Application-via-applications">
+ <attr name="Name" type="string" val="applications"/>
+ <rel name="From" class="Class" id="Segment"/>
+ <rel name="To" class="Class" id="Application"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Segment-2-Application-via-applications"/>
+  <ref class="Point" id="2 Segment-2-Application-via-applications"/>
+  <ref class="Point" id="3 Segment-2-Application-via-applications"/>
+  <ref class="Point" id="4 Segment-2-Application-via-applications"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="Segment-2-RCApplication-via-controller">
+ <attr name="Name" type="string" val="controller"/>
+ <rel name="From" class="Class" id="Segment"/>
+ <rel name="To" class="Class" id="RCApplication"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Segment-2-RCApplication-via-controller"/>
+  <ref class="Point" id="2 Segment-2-RCApplication-via-controller"/>
+  <ref class="Point" id="3 Segment-2-RCApplication-via-controller"/>
+  <ref class="Point" id="4 Segment-2-RCApplication-via-controller"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="Segment-2-Segment-via-segments">
+ <attr name="Name" type="string" val="segments"/>
+ <rel name="From" class="Class" id="Segment"/>
+ <rel name="To" class="Class" id="Segment"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Segment-2-Segment-via-segments"/>
+  <ref class="Point" id="2 Segment-2-Segment-via-segments"/>
+  <ref class="Point" id="3 Segment-2-Segment-via-segments"/>
+  <ref class="Point" id="4 Segment-2-Segment-via-segments"/>
+  <ref class="Point" id="5 Segment-2-Segment-via-segments"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="Session-2-Application-via-infrastructure_applications">
+ <attr name="Name" type="string" val="infrastructure_applications"/>
+ <rel name="From" class="Class" id="Session"/>
+ <rel name="To" class="Class" id="Application"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Session-2-Application-via-infrastructure_applications"/>
+  <ref class="Point" id="2 Session-2-Application-via-infrastructure_applications"/>
+  <ref class="Point" id="3 Session-2-Application-via-infrastructure_applications"/>
+  <ref class="Point" id="4 Session-2-Application-via-infrastructure_applications"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="Session-2-DetectorConfig-via-detector_configuration">
+ <attr name="Name" type="string" val="detector_configuration"/>
+ <rel name="From" class="Class" id="Session"/>
+ <rel name="To" class="Class" id="DetectorConfig"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Session-2-DetectorConfig-via-detector_configuration"/>
+  <ref class="Point" id="2 Session-2-DetectorConfig-via-detector_configuration"/>
+  <ref class="Point" id="3 Session-2-DetectorConfig-via-detector_configuration"/>
+  <ref class="Point" id="4 Session-2-DetectorConfig-via-detector_configuration"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="Session-2-ReadoutMap-via-readout_map">
+ <attr name="Name" type="string" val="readout_map"/>
+ <rel name="From" class="Class" id="Session"/>
+ <rel name="To" class="Class" id="ReadoutMap"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Session-2-ReadoutMap-via-readout_map"/>
+  <ref class="Point" id="2 Session-2-ReadoutMap-via-readout_map"/>
+  <ref class="Point" id="3 Session-2-ReadoutMap-via-readout_map"/>
+  <ref class="Point" id="4 Session-2-ReadoutMap-via-readout_map"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="Session-2-ResourceBase-via-disabled">
+ <attr name="Name" type="string" val="disabled"/>
+ <rel name="From" class="Class" id="Session"/>
+ <rel name="To" class="Class" id="ResourceBase"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Session-2-ResourceBase-via-disabled"/>
+  <ref class="Point" id="2 Session-2-ResourceBase-via-disabled"/>
+  <ref class="Point" id="3 Session-2-ResourceBase-via-disabled"/>
+  <ref class="Point" id="4 Session-2-ResourceBase-via-disabled"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="Session-2-Segment-via-segment">
+ <attr name="Name" type="string" val="segment"/>
+ <rel name="From" class="Class" id="Session"/>
+ <rel name="To" class="Class" id="Segment"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Session-2-Segment-via-segment"/>
+  <ref class="Point" id="2 Session-2-Segment-via-segment"/>
+  <ref class="Point" id="3 Session-2-Segment-via-segment"/>
+  <ref class="Point" id="4 Session-2-Segment-via-segment"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="Session-2-VariableBase-via-environment">
+ <attr name="Name" type="string" val="environment"/>
+ <rel name="From" class="Class" id="Session"/>
+ <rel name="To" class="Class" id="VariableBase"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Session-2-VariableBase-via-environment"/>
+  <ref class="Point" id="2 Session-2-VariableBase-via-environment"/>
+  <ref class="Point" id="3 Session-2-VariableBase-via-environment"/>
+  <ref class="Point" id="4 Session-2-VariableBase-via-environment"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="VariableSet-2-VariableBase-via-contains">
+ <attr name="Name" type="string" val="contains"/>
+ <rel name="From" class="Class" id="VariableSet"/>
+ <rel name="To" class="Class" id="VariableBase"/>
+ <rel name="Points">
+  <ref class="Point" id="1 VariableSet-2-VariableBase-via-contains"/>
+  <ref class="Point" id="2 VariableSet-2-VariableBase-via-contains"/>
+  <ref class="Point" id="3 VariableSet-2-VariableBase-via-contains"/>
+  <ref class="Point" id="4 VariableSet-2-VariableBase-via-contains"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="VirtualHost-2-HostComponent-via-uses">
+ <attr name="Name" type="string" val="uses"/>
+ <rel name="From" class="Class" id="VirtualHost"/>
+ <rel name="To" class="Class" id="HostComponent"/>
+ <rel name="Points">
+  <ref class="Point" id="1 VirtualHost-2-HostComponent-via-uses"/>
+  <ref class="Point" id="2 VirtualHost-2-HostComponent-via-uses"/>
+  <ref class="Point" id="3 VirtualHost-2-HostComponent-via-uses"/>
+  <ref class="Point" id="4 VirtualHost-2-HostComponent-via-uses"/>
+ </rel>
+</obj>
+
+<obj class="ALink" id="VirtualHost-2-PhysicalHost-via-runs_on">
+ <attr name="Name" type="string" val="runs_on"/>
+ <rel name="From" class="Class" id="VirtualHost"/>
+ <rel name="To" class="Class" id="PhysicalHost"/>
+ <rel name="Points">
+  <ref class="Point" id="1 VirtualHost-2-PhysicalHost-via-runs_on"/>
+  <ref class="Point" id="2 VirtualHost-2-PhysicalHost-via-runs_on"/>
+  <ref class="Point" id="3 VirtualHost-2-PhysicalHost-via-runs_on"/>
+  <ref class="Point" id="4 VirtualHost-2-PhysicalHost-via-runs_on"/>
+ </rel>
+</obj>
+
+<obj class="Class" id="Application">
+ <attr name="x" type="s16" val="235"/>
+ <attr name="y" type="s16" val="210"/>
+</obj>
+
+<obj class="Class" id="Component">
+ <attr name="x" type="s16" val="725"/>
+ <attr name="y" type="s16" val="61"/>
+</obj>
+
+<obj class="Class" id="Connection">
+ <attr name="x" type="s16" val="274"/>
+ <attr name="y" type="s16" val="551"/>
+</obj>
+
+<obj class="Class" id="ConnectionService">
+ <attr name="x" type="s16" val="1119"/>
+ <attr name="y" type="s16" val="521"/>
+</obj>
+
+<obj class="Class" id="DROStreamConf">
+ <attr name="x" type="s16" val="748"/>
+ <attr name="y" type="s16" val="266"/>
+</obj>
+
+<obj class="Class" id="DaqApplication">
+ <attr name="x" type="s16" val="230"/>
+ <attr name="y" type="s16" val="453"/>
+</obj>
+
+<obj class="Class" id="DaqModule">
+ <attr name="x" type="s16" val="545"/>
+ <attr name="y" type="s16" val="554"/>
+</obj>
+
+<obj class="Class" id="DetectorConfig">
+ <attr name="x" type="s16" val="1174"/>
+ <attr name="y" type="s16" val="31"/>
+</obj>
+
+<obj class="Class" id="GeoId">
+ <attr name="x" type="s16" val="944"/>
+ <attr name="y" type="s16" val="247"/>
+</obj>
+
+<obj class="Class" id="HostComponent">
+ <attr name="x" type="s16" val="890"/>
+ <attr name="y" type="s16" val="526"/>
+</obj>
+
+<obj class="Class" id="NetworkConnection">
+ <attr name="x" type="s16" val="102"/>
+ <attr name="y" type="s16" val="650"/>
+</obj>
+
+<obj class="Class" id="NetworkDevice">
+ <attr name="x" type="s16" val="976"/>
+ <attr name="y" type="s16" val="631"/>
+</obj>
+
+<obj class="Class" id="NetworkInterface">
+ <attr name="x" type="s16" val="1173"/>
+ <attr name="y" type="s16" val="586"/>
+</obj>
+
+<obj class="Class" id="PhysicalHost">
+ <attr name="x" type="s16" val="864"/>
+ <attr name="y" type="s16" val="436"/>
+</obj>
+
+<obj class="Class" id="ProcessingResource">
+ <attr name="x" type="s16" val="861"/>
+ <attr name="y" type="s16" val="680"/>
+</obj>
+
+<obj class="Class" id="Queue">
+ <attr name="x" type="s16" val="343"/>
+ <attr name="y" type="s16" val="645"/>
+</obj>
+
+<obj class="Class" id="RCApplication">
+ <attr name="x" type="s16" val="351"/>
+ <attr name="y" type="s16" val="326"/>
+</obj>
+
+<obj class="Class" id="ReadoutGroup">
+ <attr name="x" type="s16" val="1317"/>
+ <attr name="y" type="s16" val="514"/>
+</obj>
+
+<obj class="Class" id="ReadoutMap">
+ <attr name="x" type="s16" val="1321"/>
+ <attr name="y" type="s16" val="416"/>
+</obj>
+
+<obj class="Class" id="ResourceBase">
+ <attr name="x" type="s16" val="732"/>
+ <attr name="y" type="s16" val="163"/>
+</obj>
+
+<obj class="Class" id="ResourceSet">
+ <attr name="x" type="s16" val="838"/>
+ <attr name="y" type="s16" val="205"/>
+</obj>
+
+<obj class="Class" id="Segment">
+ <attr name="x" type="s16" val="685"/>
+ <attr name="y" type="s16" val="344"/>
+</obj>
+
+<obj class="Class" id="Service">
+ <attr name="x" type="s16" val="54"/>
+ <attr name="y" type="s16" val="406"/>
+</obj>
+
+<obj class="Class" id="Session">
+ <attr name="x" type="s16" val="1112"/>
+ <attr name="y" type="s16" val="172"/>
+</obj>
+
+<obj class="Class" id="StorageDevice">
+ <attr name="x" type="s16" val="800"/>
+ <attr name="y" type="s16" val="618"/>
+</obj>
+
+<obj class="Class" id="Variable">
+ <attr name="x" type="s16" val="476"/>
+ <attr name="y" type="s16" val="146"/>
+</obj>
+
+<obj class="Class" id="VariableBase">
+ <attr name="x" type="s16" val="499"/>
+ <attr name="y" type="s16" val="41"/>
+</obj>
+
+<obj class="Class" id="VariableSet">
+ <attr name="x" type="s16" val="569"/>
+ <attr name="y" type="s16" val="154"/>
+</obj>
+
+<obj class="Class" id="VirtualHost">
+ <attr name="x" type="s16" val="683"/>
+ <attr name="y" type="s16" val="432"/>
+</obj>
+
+<obj class="GLink" id="Application-2-ConnectionService">
+ <rel name="From" class="Class" id="Application"/>
+ <rel name="To" class="Class" id="ConnectionService"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Application-2-ConnectionService"/>
+  <ref class="Point" id="2 Application-2-ConnectionService"/>
+  <ref class="Point" id="3 Application-2-ConnectionService"/>
+  <ref class="Point" id="4 Application-2-ConnectionService"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="Application-2-DaqApplication">
+ <rel name="From" class="Class" id="Application"/>
+ <rel name="To" class="Class" id="DaqApplication"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Application-2-DaqApplication"/>
+  <ref class="Point" id="2 Application-2-DaqApplication"/>
+  <ref class="Point" id="3 Application-2-DaqApplication"/>
+  <ref class="Point" id="4 Application-2-DaqApplication"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="Application-2-RCApplication">
+ <rel name="From" class="Class" id="Application"/>
+ <rel name="To" class="Class" id="RCApplication"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Application-2-RCApplication"/>
+  <ref class="Point" id="2 Application-2-RCApplication"/>
+  <ref class="Point" id="3 Application-2-RCApplication"/>
+  <ref class="Point" id="4 Application-2-RCApplication"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="Component-2-ResourceBase">
+ <rel name="From" class="Class" id="Component"/>
+ <rel name="To" class="Class" id="ResourceBase"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Component-2-ResourceBase"/>
+  <ref class="Point" id="2 Component-2-ResourceBase"/>
+  <ref class="Point" id="3 Component-2-ResourceBase"/>
+  <ref class="Point" id="4 Component-2-ResourceBase"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="Connection-2-NetworkConnection">
+ <rel name="From" class="Class" id="Connection"/>
+ <rel name="To" class="Class" id="NetworkConnection"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Connection-2-NetworkConnection"/>
+  <ref class="Point" id="2 Connection-2-NetworkConnection"/>
+  <ref class="Point" id="3 Connection-2-NetworkConnection"/>
+  <ref class="Point" id="4 Connection-2-NetworkConnection"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="Connection-2-Queue">
+ <rel name="From" class="Class" id="Connection"/>
+ <rel name="To" class="Class" id="Queue"/>
+ <rel name="Points">
+  <ref class="Point" id="1 Connection-2-Queue"/>
+  <ref class="Point" id="2 Connection-2-Queue"/>
+  <ref class="Point" id="3 Connection-2-Queue"/>
+  <ref class="Point" id="4 Connection-2-Queue"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="HostComponent-2-NetworkDevice">
+ <rel name="From" class="Class" id="HostComponent"/>
+ <rel name="To" class="Class" id="NetworkDevice"/>
+ <rel name="Points">
+  <ref class="Point" id="1 HostComponent-2-NetworkDevice"/>
+  <ref class="Point" id="2 HostComponent-2-NetworkDevice"/>
+  <ref class="Point" id="3 HostComponent-2-NetworkDevice"/>
+  <ref class="Point" id="4 HostComponent-2-NetworkDevice"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="HostComponent-2-ProcessingResource">
+ <rel name="From" class="Class" id="HostComponent"/>
+ <rel name="To" class="Class" id="ProcessingResource"/>
+ <rel name="Points">
+  <ref class="Point" id="1 HostComponent-2-ProcessingResource"/>
+  <ref class="Point" id="2 HostComponent-2-ProcessingResource"/>
+  <ref class="Point" id="3 HostComponent-2-ProcessingResource"/>
+  <ref class="Point" id="4 HostComponent-2-ProcessingResource"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="HostComponent-2-StorageDevice">
+ <rel name="From" class="Class" id="HostComponent"/>
+ <rel name="To" class="Class" id="StorageDevice"/>
+ <rel name="Points">
+  <ref class="Point" id="1 HostComponent-2-StorageDevice"/>
+  <ref class="Point" id="2 HostComponent-2-StorageDevice"/>
+  <ref class="Point" id="3 HostComponent-2-StorageDevice"/>
+  <ref class="Point" id="4 HostComponent-2-StorageDevice"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="ResourceBase-2-DROStreamConf">
+ <rel name="From" class="Class" id="ResourceBase"/>
+ <rel name="To" class="Class" id="DROStreamConf"/>
+ <rel name="Points">
+  <ref class="Point" id="1 ResourceBase-2-DROStreamConf"/>
+  <ref class="Point" id="2 ResourceBase-2-DROStreamConf"/>
+  <ref class="Point" id="3 ResourceBase-2-DROStreamConf"/>
+  <ref class="Point" id="4 ResourceBase-2-DROStreamConf"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="ResourceBase-2-ResourceSet">
+ <rel name="From" class="Class" id="ResourceBase"/>
+ <rel name="To" class="Class" id="ResourceSet"/>
+ <rel name="Points">
+  <ref class="Point" id="1 ResourceBase-2-ResourceSet"/>
+  <ref class="Point" id="2 ResourceBase-2-ResourceSet"/>
+  <ref class="Point" id="3 ResourceBase-2-ResourceSet"/>
+  <ref class="Point" id="4 ResourceBase-2-ResourceSet"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="ResourceBase-2-Segment">
+ <rel name="From" class="Class" id="ResourceBase"/>
+ <rel name="To" class="Class" id="Segment"/>
+ <rel name="Points">
+  <ref class="Point" id="1 ResourceBase-2-Segment"/>
+  <ref class="Point" id="2 ResourceBase-2-Segment"/>
+  <ref class="Point" id="3 ResourceBase-2-Segment"/>
+  <ref class="Point" id="4 ResourceBase-2-Segment"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="VariableBase-2-Variable">
+ <rel name="From" class="Class" id="VariableBase"/>
+ <rel name="To" class="Class" id="Variable"/>
+ <rel name="Points">
+  <ref class="Point" id="1 VariableBase-2-Variable"/>
+  <ref class="Point" id="2 VariableBase-2-Variable"/>
+  <ref class="Point" id="3 VariableBase-2-Variable"/>
+  <ref class="Point" id="4 VariableBase-2-Variable"/>
+ </rel>
+</obj>
+
+<obj class="GLink" id="VariableBase-2-VariableSet">
+ <rel name="From" class="Class" id="VariableBase"/>
+ <rel name="To" class="Class" id="VariableSet"/>
+ <rel name="Points">
+  <ref class="Point" id="1 VariableBase-2-VariableSet"/>
+  <ref class="Point" id="2 VariableBase-2-VariableSet"/>
+  <ref class="Point" id="3 VariableBase-2-VariableSet"/>
+  <ref class="Point" id="4 VariableBase-2-VariableSet"/>
+ </rel>
+</obj>
+
+<obj class="Point" id="1 Application-2-ConnectionService">
+ <attr name="x" type="s16" val="90"/>
+ <attr name="y" type="s16" val="51"/>
+</obj>
+
+<obj class="Point" id="1 Application-2-DaqApplication">
+ <attr name="x" type="s16" val="17"/>
+ <attr name="y" type="s16" val="51"/>
+</obj>
+
+<obj class="Point" id="1 Application-2-RCApplication">
+ <attr name="x" type="s16" val="138"/>
+ <attr name="y" type="s16" val="51"/>
+</obj>
+
+<obj class="Point" id="1 Application-2-Service-via-exposes_service">
+ <attr name="y" type="s16" val="51"/>
+</obj>
+
+<obj class="Point" id="1 Application-2-VariableBase-via-applicationEnvironment">
+ <attr name="x" type="s16" val="141"/>
+ <attr name="y" type="s16" val="51"/>
+</obj>
+
+<obj class="Point" id="1 Application-2-VirtualHost-via-runs_on">
+ <attr name="x" type="s16" val="47"/>
+ <attr name="y" type="s16" val="51"/>
+</obj>
+
+<obj class="Point" id="1 Component-2-ResourceBase">
+ <attr name="x" type="s16" val="44"/>
+ <attr name="y" type="s16" val="65"/>
+</obj>
+
+<obj class="Point" id="1 Connection-2-NetworkConnection">
+ <attr name="x" type="s16" val="15"/>
+ <attr name="y" type="s16" val="38"/>
+</obj>
+
+<obj class="Point" id="1 Connection-2-Queue">
+ <attr name="x" type="s16" val="88"/>
+ <attr name="y" type="s16" val="38"/>
+</obj>
+
+<obj class="Point" id="1 DROStreamConf-2-GeoId-via-geo_id">
+ <attr name="x" type="s16" val="75"/>
+ <attr name="y" type="s16" val="38"/>
+</obj>
+
+<obj class="Point" id="1 DaqApplication-2-DaqModule-via-modules">
+ <attr name="x" type="s16" val="191"/>
+ <attr name="y" type="s16" val="51"/>
+</obj>
+
+<obj class="Point" id="1 DaqModule-2-Connection-via-inputs">
+ <attr name="x" type="s16" val="60"/>
+ <attr name="y" type="s16" val="32"/>
+</obj>
+
+<obj class="Point" id="1 DaqModule-2-Connection-via-outputs">
+ <attr name="x" type="s16" val="60"/>
+ <attr name="y" type="s16" val="32"/>
+</obj>
+
+<obj class="Point" id="1 DaqModule-2-HostComponent-via-used_resources">
+ <attr name="x" type="s16" val="74"/>
+ <attr name="y" type="s16" val="32"/>
+</obj>
+
+<obj class="Point" id="1 HostComponent-2-NetworkDevice">
+ <attr name="x" type="s16" val="96"/>
+ <attr name="y" type="s16" val="38"/>
+</obj>
+
+<obj class="Point" id="1 HostComponent-2-ProcessingResource">
+ <attr name="x" type="s16" val="49"/>
+ <attr name="y" type="s16" val="38"/>
+</obj>
+
+<obj class="Point" id="1 HostComponent-2-StorageDevice">
+ <attr name="y" type="s16" val="38"/>
+</obj>
+
+<obj class="Point" id="1 NetworkConnection-2-Service-via-associated_service">
+ <attr name="y" type="s16" val="38"/>
+</obj>
+
+<obj class="Point" id="1 NetworkDevice-2-NetworkInterface-via-network">
+ <attr name="x" type="s16" val="71"/>
+ <attr name="y" type="s16" val="24"/>
+</obj>
+
+<obj class="Point" id="1 PhysicalHost-2-HostComponent-via-contains">
+ <attr name="x" type="s16" val="63"/>
+ <attr name="y" type="s16" val="24"/>
+</obj>
+
+<obj class="Point" id="1 ReadoutMap-2-ReadoutGroup-via-groups">
+ <attr name="x" type="s16" val="39"/>
+ <attr name="y" type="s16" val="24"/>
+</obj>
+
+<obj class="Point" id="1 ResourceBase-2-DROStreamConf">
+ <attr name="x" type="s16" val="41"/>
+ <attr name="y" type="s16" val="24"/>
+</obj>
+
+<obj class="Point" id="1 ResourceBase-2-ResourceSet">
+ <attr name="x" type="s16" val="74"/>
+ <attr name="y" type="s16" val="32"/>
+</obj>
+
+<obj class="Point" id="1 ResourceBase-2-Segment">
+ <attr name="y" type="s16" val="32"/>
+</obj>
+
+<obj class="Point" id="1 ResourceSet-2-ResourceBase-via-contains">
+ <attr name="x" type="s16" val="66"/>
+ <attr name="y" type="s16" val="24"/>
+</obj>
+
+<obj class="Point" id="1 Segment-2-Application-via-applications">
+ <attr name="x" type="s16" val="12"/>
+ <attr name="y" type="s16" val="32"/>
+</obj>
+
+<obj class="Point" id="1 Segment-2-RCApplication-via-controller">
+ <attr name="x" type="s16" val="26"/>
+ <attr name="y" type="s16" val="32"/>
+</obj>
+
+<obj class="Point" id="1 Segment-2-Segment-via-segments">
+ <attr name="x" type="s16" val="35"/>
+ <attr name="y" type="s16" val="32"/>
+</obj>
+
+<obj class="Point" id="1 Session-2-Application-via-infrastructure_applications">
+ <attr name="x" type="s16" val="204"/>
+ <attr name="y" type="s16" val="146"/>
+</obj>
+
+<obj class="Point" id="1 Session-2-DetectorConfig-via-detector_configuration">
+ <attr name="x" type="s16" val="196"/>
+ <attr name="y" type="s16" val="105"/>
+</obj>
+
+<obj class="Point" id="1 Session-2-ReadoutMap-via-readout_map">
+ <attr name="x" type="s16" val="204"/>
+ <attr name="y" type="s16" val="146"/>
+</obj>
+
+<obj class="Point" id="1 Session-2-ResourceBase-via-disabled">
+ <attr name="x" type="s16" val="95"/>
+ <attr name="y" type="s16" val="105"/>
+</obj>
+
+<obj class="Point" id="1 Session-2-Segment-via-segment">
+ <attr name="x" type="s16" val="204"/>
+ <attr name="y" type="s16" val="105"/>
+</obj>
+
+<obj class="Point" id="1 Session-2-VariableBase-via-environment">
+ <attr name="x" type="s16" val="16"/>
+ <attr name="y" type="s16" val="105"/>
+</obj>
+
+<obj class="Point" id="1 VariableBase-2-Variable">
+ <attr name="x" type="s16" val="23"/>
+ <attr name="y" type="s16" val="38"/>
+</obj>
+
+<obj class="Point" id="1 VariableBase-2-VariableSet">
+ <attr name="x" type="s16" val="84"/>
+ <attr name="y" type="s16" val="38"/>
+</obj>
+
+<obj class="Point" id="1 VariableSet-2-VariableBase-via-contains">
+ <attr name="x" type="s16" val="67"/>
+ <attr name="y" type="s16" val="24"/>
+</obj>
+
+<obj class="Point" id="1 VirtualHost-2-HostComponent-via-uses">
+ <attr name="x" type="s16" val="53"/>
+ <attr name="y" type="s16" val="24"/>
+</obj>
+
+<obj class="Point" id="1 VirtualHost-2-PhysicalHost-via-runs_on">
+ <attr name="x" type="s16" val="53"/>
+ <attr name="y" type="s16" val="24"/>
+</obj>
+
+<obj class="Point" id="2 Application-2-ConnectionService">
+ <attr name="x" type="s16" val="90"/>
+ <attr name="y" type="s16" val="413"/>
+</obj>
+
+<obj class="Point" id="2 Application-2-DaqApplication">
+ <attr name="x" type="s16" val="17"/>
+ <attr name="y" type="s16" val="348"/>
+</obj>
+
+<obj class="Point" id="2 Application-2-RCApplication">
+ <attr name="x" type="s16" val="138"/>
+ <attr name="y" type="s16" val="332"/>
+</obj>
+
+<obj class="Point" id="2 Application-2-Service-via-exposes_service">
+ <attr name="y" type="s16" val="242"/>
+</obj>
+
+<obj class="Point" id="2 Application-2-VariableBase-via-applicationEnvironment">
+ <attr name="x" type="s16" val="141"/>
+ <attr name="y" type="s16" val="61"/>
+</obj>
+
+<obj class="Point" id="2 Application-2-VirtualHost-via-runs_on">
+ <attr name="x" type="s16" val="47"/>
+ <attr name="y" type="s16" val="435"/>
+</obj>
+
+<obj class="Point" id="2 Component-2-ResourceBase">
+ <attr name="x" type="s16" val="44"/>
+ <attr name="y" type="s16" val="154"/>
+</obj>
+
+<obj class="Point" id="2 Connection-2-NetworkConnection">
+ <attr name="x" type="s16" val="15"/>
+ <attr name="y" type="s16" val="633"/>
+</obj>
+
+<obj class="Point" id="2 Connection-2-Queue">
+ <attr name="x" type="s16" val="88"/>
+ <attr name="y" type="s16" val="656"/>
+</obj>
+
+<obj class="Point" id="2 DROStreamConf-2-GeoId-via-geo_id">
+ <attr name="x" type="s16" val="75"/>
+ <attr name="y" type="s16" val="294"/>
+</obj>
+
+<obj class="Point" id="2 DaqApplication-2-DaqModule-via-modules">
+ <attr name="x" type="s16" val="191"/>
+ <attr name="y" type="s16" val="503"/>
+</obj>
+
+<obj class="Point" id="2 DaqModule-2-Connection-via-inputs">
+ <attr name="x" type="s16" val="60"/>
+ <attr name="y" type="s16" val="560"/>
+</obj>
+
+<obj class="Point" id="2 DaqModule-2-Connection-via-outputs">
+ <attr name="x" type="s16" val="60"/>
+ <attr name="y" type="s16" val="581"/>
+</obj>
+
+<obj class="Point" id="2 DaqModule-2-HostComponent-via-used_resources">
+ <attr name="x" type="s16" val="74"/>
+ <attr name="y" type="s16" val="563"/>
+</obj>
+
+<obj class="Point" id="2 HostComponent-2-NetworkDevice">
+ <attr name="x" type="s16" val="96"/>
+ <attr name="y" type="s16" val="651"/>
+</obj>
+
+<obj class="Point" id="2 HostComponent-2-ProcessingResource">
+ <attr name="x" type="s16" val="49"/>
+ <attr name="y" type="s16" val="608"/>
+</obj>
+
+<obj class="Point" id="2 HostComponent-2-StorageDevice">
+ <attr name="y" type="s16" val="603"/>
+</obj>
+
+<obj class="Point" id="2 NetworkConnection-2-Service-via-associated_service">
+ <attr name="y" type="s16" val="679"/>
+</obj>
+
+<obj class="Point" id="2 NetworkDevice-2-NetworkInterface-via-network">
+ <attr name="x" type="s16" val="71"/>
+ <attr name="y" type="s16" val="656"/>
+</obj>
+
+<obj class="Point" id="2 PhysicalHost-2-HostComponent-via-contains">
+ <attr name="x" type="s16" val="63"/>
+ <attr name="y" type="s16" val="490"/>
+</obj>
+
+<obj class="Point" id="2 ReadoutMap-2-ReadoutGroup-via-groups">
+ <attr name="x" type="s16" val="39"/>
+ <attr name="y" type="s16" val="473"/>
+</obj>
+
+<obj class="Point" id="2 ResourceBase-2-DROStreamConf">
+ <attr name="x" type="s16" val="41"/>
+ <attr name="y" type="s16" val="234"/>
+</obj>
+
+<obj class="Point" id="2 ResourceBase-2-ResourceSet">
+ <attr name="x" type="s16" val="74"/>
+ <attr name="y" type="s16" val="221"/>
+</obj>
+
+<obj class="Point" id="2 ResourceBase-2-Segment">
+ <attr name="y" type="s16" val="305"/>
+</obj>
+
+<obj class="Point" id="2 ResourceSet-2-ResourceBase-via-contains">
+ <attr name="x" type="s16" val="66"/>
+ <attr name="y" type="s16" val="185"/>
+</obj>
+
+<obj class="Point" id="2 Segment-2-Application-via-applications">
+ <attr name="x" type="s16" val="12"/>
+ <attr name="y" type="s16" val="267"/>
+</obj>
+
+<obj class="Point" id="2 Segment-2-RCApplication-via-controller">
+ <attr name="x" type="s16" val="26"/>
+ <attr name="y" type="s16" val="362"/>
+</obj>
+
+<obj class="Point" id="2 Segment-2-Segment-via-segments">
+ <attr name="x" type="s16" val="35"/>
+ <attr name="y" type="s16" val="54"/>
+</obj>
+
+<obj class="Point" id="2 Session-2-Application-via-infrastructure_applications">
+ <attr name="x" type="s16" val="204"/>
+ <attr name="y" type="s16" val="240"/>
+</obj>
+
+<obj class="Point" id="2 Session-2-DetectorConfig-via-detector_configuration">
+ <attr name="x" type="s16" val="196"/>
+ <attr name="y" type="s16" val="142"/>
+</obj>
+
+<obj class="Point" id="2 Session-2-ReadoutMap-via-readout_map">
+ <attr name="x" type="s16" val="204"/>
+ <attr name="y" type="s16" val="223"/>
+</obj>
+
+<obj class="Point" id="2 Session-2-ResourceBase-via-disabled">
+ <attr name="x" type="s16" val="95"/>
+ <attr name="y" type="s16" val="175"/>
+</obj>
+
+<obj class="Point" id="2 Session-2-Segment-via-segment">
+ <attr name="x" type="s16" val="204"/>
+ <attr name="y" type="s16" val="359"/>
+</obj>
+
+<obj class="Point" id="2 Session-2-VariableBase-via-environment">
+ <attr name="x" type="s16" val="16"/>
+ <attr name="y" type="s16" val="48"/>
+</obj>
+
+<obj class="Point" id="2 VariableBase-2-Variable">
+ <attr name="x" type="s16" val="23"/>
+ <attr name="y" type="s16" val="114"/>
+</obj>
+
+<obj class="Point" id="2 VariableBase-2-VariableSet">
+ <attr name="x" type="s16" val="84"/>
+ <attr name="y" type="s16" val="122"/>
+</obj>
+
+<obj class="Point" id="2 VariableSet-2-VariableBase-via-contains">
+ <attr name="x" type="s16" val="67"/>
+ <attr name="y" type="s16" val="80"/>
+</obj>
+
+<obj class="Point" id="2 VirtualHost-2-HostComponent-via-uses">
+ <attr name="x" type="s16" val="53"/>
+ <attr name="y" type="s16" val="532"/>
+</obj>
+
+<obj class="Point" id="2 VirtualHost-2-PhysicalHost-via-runs_on">
+ <attr name="x" type="s16" val="53"/>
+ <attr name="y" type="s16" val="449"/>
+</obj>
+
+<obj class="Point" id="3 Application-2-ConnectionService">
+ <attr name="x" type="s16" val="29"/>
+ <attr name="y" type="s16" val="413"/>
+</obj>
+
+<obj class="Point" id="3 Application-2-DaqApplication">
+ <attr name="x" type="s16" val="22"/>
+ <attr name="y" type="s16" val="348"/>
+</obj>
+
+<obj class="Point" id="3 Application-2-RCApplication">
+ <attr name="x" type="s16" val="44"/>
+ <attr name="y" type="s16" val="332"/>
+</obj>
+
+<obj class="Point" id="3 Application-2-Service-via-exposes_service">
+ <attr name="x" type="s16" val="36"/>
+ <attr name="y" type="s16" val="242"/>
+</obj>
+
+<obj class="Point" id="3 Application-2-VariableBase-via-applicationEnvironment">
+ <attr name="x" type="s16" val="68"/>
+ <attr name="y" type="s16" val="61"/>
+</obj>
+
+<obj class="Point" id="3 Application-2-VirtualHost-via-runs_on">
+ <attr name="y" type="s16" val="435"/>
+</obj>
+
+<obj class="Point" id="3 Component-2-ResourceBase">
+ <attr name="x" type="s16" val="37"/>
+ <attr name="y" type="s16" val="154"/>
+</obj>
+
+<obj class="Point" id="3 Connection-2-NetworkConnection">
+ <attr name="x" type="s16" val="187"/>
+ <attr name="y" type="s16" val="633"/>
+</obj>
+
+<obj class="Point" id="3 Connection-2-Queue">
+ <attr name="x" type="s16" val="29"/>
+ <attr name="y" type="s16" val="656"/>
+</obj>
+
+<obj class="Point" id="3 DROStreamConf-2-GeoId-via-geo_id">
+ <attr name="x" type="s16" val="25"/>
+ <attr name="y" type="s16" val="294"/>
+</obj>
+
+<obj class="Point" id="3 DaqApplication-2-DaqModule-via-modules">
+ <attr name="x" type="s16" val="18"/>
+ <attr name="y" type="s16" val="503"/>
+</obj>
+
+<obj class="Point" id="3 DaqModule-2-Connection-via-inputs">
+ <attr name="x" type="s16" val="25"/>
+ <attr name="y" type="s16" val="560"/>
+</obj>
+
+<obj class="Point" id="3 DaqModule-2-Connection-via-outputs">
+ <attr name="x" type="s16" val="25"/>
+ <attr name="y" type="s16" val="581"/>
+</obj>
+
+<obj class="Point" id="3 DaqModule-2-HostComponent-via-used_resources">
+ <attr name="x" type="s16" val="26"/>
+ <attr name="y" type="s16" val="563"/>
+</obj>
+
+<obj class="Point" id="3 HostComponent-2-NetworkDevice">
+ <attr name="x" type="s16" val="4"/>
+ <attr name="y" type="s16" val="651"/>
+</obj>
+
+<obj class="Point" id="3 HostComponent-2-ProcessingResource">
+ <attr name="x" type="s16" val="78"/>
+ <attr name="y" type="s16" val="608"/>
+</obj>
+
+<obj class="Point" id="3 HostComponent-2-StorageDevice">
+ <attr name="x" type="s16" val="90"/>
+ <attr name="y" type="s16" val="603"/>
+</obj>
+
+<obj class="Point" id="3 NetworkConnection-2-Service-via-associated_service">
+ <attr name="x" type="s16" val="76"/>
+ <attr name="y" type="s16" val="679"/>
+</obj>
+
+<obj class="Point" id="3 NetworkDevice-2-NetworkInterface-via-network">
+ <attr name="x" type="s16" val="38"/>
+ <attr name="y" type="s16" val="656"/>
+</obj>
+
+<obj class="Point" id="3 PhysicalHost-2-HostComponent-via-contains">
+ <attr name="x" type="s16" val="36"/>
+ <attr name="y" type="s16" val="490"/>
+</obj>
+
+<obj class="Point" id="3 ReadoutMap-2-ReadoutGroup-via-groups">
+ <attr name="x" type="s16" val="43"/>
+ <attr name="y" type="s16" val="473"/>
+</obj>
+
+<obj class="Point" id="3 ResourceBase-2-DROStreamConf">
+ <attr name="x" type="s16" val="25"/>
+ <attr name="y" type="s16" val="234"/>
+</obj>
+
+<obj class="Point" id="3 ResourceBase-2-ResourceSet">
+ <attr name="x" type="s16" val="7"/>
+ <attr name="y" type="s16" val="221"/>
+</obj>
+
+<obj class="Point" id="3 ResourceBase-2-Segment">
+ <attr name="x" type="s16" val="47"/>
+ <attr name="y" type="s16" val="305"/>
+</obj>
+
+<obj class="Point" id="3 ResourceSet-2-ResourceBase-via-contains">
+ <attr name="x" type="s16" val="22"/>
+ <attr name="y" type="s16" val="185"/>
+</obj>
+
+<obj class="Point" id="3 Segment-2-Application-via-applications">
+ <attr name="x" type="s16" val="169"/>
+ <attr name="y" type="s16" val="267"/>
+</obj>
+
+<obj class="Point" id="3 Segment-2-RCApplication-via-controller">
+ <attr name="x" type="s16" val="96"/>
+ <attr name="y" type="s16" val="362"/>
+</obj>
+
+<obj class="Point" id="3 Segment-2-Segment-via-segments">
+ <attr name="x" type="s16" val="81"/>
+ <attr name="y" type="s16" val="54"/>
+</obj>
+
+<obj class="Point" id="3 Session-2-Application-via-infrastructure_applications">
+ <attr name="x" type="s16" val="47"/>
+ <attr name="y" type="s16" val="240"/>
+</obj>
+
+<obj class="Point" id="3 Session-2-DetectorConfig-via-detector_configuration">
+ <attr name="x" type="s16" val="134"/>
+ <attr name="y" type="s16" val="142"/>
+</obj>
+
+<obj class="Point" id="3 Session-2-ReadoutMap-via-readout_map">
+ <attr name="x" type="s16" val="20"/>
+ <attr name="y" type="s16" val="223"/>
+</obj>
+
+<obj class="Point" id="3 Session-2-ResourceBase-via-disabled">
+ <attr name="x" type="s16" val="22"/>
+ <attr name="y" type="s16" val="175"/>
+</obj>
+
+<obj class="Point" id="3 Session-2-Segment-via-segment">
+ <attr name="x" type="s16" val="58"/>
+ <attr name="y" type="s16" val="359"/>
+</obj>
+
+<obj class="Point" id="3 Session-2-VariableBase-via-environment">
+ <attr name="x" type="s16" val="108"/>
+ <attr name="y" type="s16" val="48"/>
+</obj>
+
+<obj class="Point" id="3 VariableBase-2-Variable">
+ <attr name="x" type="s16" val="47"/>
+ <attr name="y" type="s16" val="114"/>
+</obj>
+
+<obj class="Point" id="3 VariableBase-2-VariableSet">
+ <attr name="x" type="s16" val="15"/>
+ <attr name="y" type="s16" val="122"/>
+</obj>
+
+<obj class="Point" id="3 VariableSet-2-VariableBase-via-contains">
+ <attr name="x" type="s16" val="108"/>
+ <attr name="y" type="s16" val="80"/>
+</obj>
+
+<obj class="Point" id="3 VirtualHost-2-HostComponent-via-uses">
+ <attr name="x" type="s16" val="26"/>
+ <attr name="y" type="s16" val="532"/>
+</obj>
+
+<obj class="Point" id="3 VirtualHost-2-PhysicalHost-via-runs_on">
+ <attr name="x" type="s16" val="20"/>
+ <attr name="y" type="s16" val="449"/>
+</obj>
+
+<obj class="Point" id="4 Application-2-ConnectionService">
+ <attr name="x" type="s16" val="29"/>
+ <attr name="y" type="s16" val="17"/>
+</obj>
+
+<obj class="Point" id="4 Application-2-DaqApplication">
+ <attr name="x" type="s16" val="22"/>
+ <attr name="y" type="s16" val="21"/>
+</obj>
+
+<obj class="Point" id="4 Application-2-RCApplication">
+ <attr name="x" type="s16" val="44"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 Application-2-Service-via-exposes_service">
+ <attr name="x" type="s16" val="36"/>
+ <attr name="y" type="s16" val="21"/>
+</obj>
+
+<obj class="Point" id="4 Application-2-VariableBase-via-applicationEnvironment">
+ <attr name="x" type="s16" val="68"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 Application-2-VirtualHost-via-runs_on">
+ <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="Point" id="4 Component-2-ResourceBase">
+ <attr name="x" type="s16" val="37"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 Connection-2-NetworkConnection">
+ <attr name="x" type="s16" val="187"/>
+ <attr name="y" type="s16" val="26"/>
+</obj>
+
+<obj class="Point" id="4 Connection-2-Queue">
+ <attr name="x" type="s16" val="29"/>
+ <attr name="y" type="s16" val="17"/>
+</obj>
+
+<obj class="Point" id="4 DROStreamConf-2-GeoId-via-geo_id">
+ <attr name="x" type="s16" val="25"/>
+ <attr name="y" type="s16" val="26"/>
+</obj>
+
+<obj class="Point" id="4 DaqApplication-2-DaqModule-via-modules">
+ <attr name="x" type="s16" val="18"/>
+ <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="Point" id="4 DaqModule-2-Connection-via-inputs">
+ <attr name="x" type="s16" val="25"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 DaqModule-2-Connection-via-outputs">
+ <attr name="x" type="s16" val="25"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 DaqModule-2-HostComponent-via-used_resources">
+ <attr name="x" type="s16" val="26"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 HostComponent-2-NetworkDevice">
+ <attr name="x" type="s16" val="4"/>
+ <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="Point" id="4 HostComponent-2-ProcessingResource">
+ <attr name="x" type="s16" val="78"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 HostComponent-2-StorageDevice">
+ <attr name="x" type="s16" val="90"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 NetworkConnection-2-Service-via-associated_service">
+ <attr name="x" type="s16" val="76"/>
+ <attr name="y" type="s16" val="21"/>
+</obj>
+
+<obj class="Point" id="4 NetworkDevice-2-NetworkInterface-via-network">
+ <attr name="x" type="s16" val="38"/>
+ <attr name="y" type="s16" val="30"/>
+</obj>
+
+<obj class="Point" id="4 PhysicalHost-2-HostComponent-via-contains">
+ <attr name="x" type="s16" val="36"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 ReadoutMap-2-ReadoutGroup-via-groups">
+ <attr name="x" type="s16" val="43"/>
+ <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="Point" id="4 ResourceBase-2-DROStreamConf">
+ <attr name="x" type="s16" val="25"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 ResourceBase-2-ResourceSet">
+ <attr name="x" type="s16" val="7"/>
+ <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="Point" id="4 ResourceBase-2-Segment">
+ <attr name="x" type="s16" val="47"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 ResourceSet-2-ResourceBase-via-contains">
+ <attr name="x" type="s16" val="22"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 Segment-2-Application-via-applications">
+ <attr name="x" type="s16" val="169"/>
+ <attr name="y" type="s16" val="17"/>
+</obj>
+
+<obj class="Point" id="4 Segment-2-RCApplication-via-controller">
+ <attr name="x" type="s16" val="96"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 Segment-2-Segment-via-segments">
+ <attr name="x" type="s16" val="81"/>
+ <attr name="y" type="s16" val="32"/>
+</obj>
+
+<obj class="Point" id="4 Session-2-Application-via-infrastructure_applications">
+ <attr name="x" type="s16" val="47"/>
+ <attr name="y" type="s16" val="17"/>
+</obj>
+
+<obj class="Point" id="4 Session-2-DetectorConfig-via-detector_configuration">
+ <attr name="x" type="s16" val="134"/>
+ <attr name="y" type="s16" val="21"/>
+</obj>
+
+<obj class="Point" id="4 Session-2-ReadoutMap-via-readout_map">
+ <attr name="x" type="s16" val="20"/>
+ <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="Point" id="4 Session-2-ResourceBase-via-disabled">
+ <attr name="x" type="s16" val="22"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 Session-2-Segment-via-segment">
+ <attr name="x" type="s16" val="58"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 Session-2-VariableBase-via-environment">
+ <attr name="x" type="s16" val="108"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 VariableBase-2-Variable">
+ <attr name="x" type="s16" val="47"/>
+ <attr name="y" type="s16" val="17"/>
+</obj>
+
+<obj class="Point" id="4 VariableBase-2-VariableSet">
+ <attr name="x" type="s16" val="15"/>
+ <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="Point" id="4 VariableSet-2-VariableBase-via-contains">
+ <attr name="x" type="s16" val="108"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 VirtualHost-2-HostComponent-via-uses">
+ <attr name="x" type="s16" val="26"/>
+ <attr name="y" type="s16" val="12"/>
+</obj>
+
+<obj class="Point" id="4 VirtualHost-2-PhysicalHost-via-runs_on">
+ <attr name="x" type="s16" val="20"/>
+ <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="Point" id="5 Segment-2-Segment-via-segments">
+ <attr name="x" type="s16" val="57"/>
+ <attr name="y" type="s16" val="32"/>
+</obj>
+
+<obj class="View" id="AlmostEverything">
+ <attr name="drawing area x margin" type="u16" val="6"/>
+ <attr name="drawing area y margin" type="u16" val="4"/>
+ <attr name="font x margin" type="u16" val="3"/>
+ <attr name="font y margin" type="u16" val="2"/>
+ <attr name="font name" type="string" val="-adobe-helvetica-medium-r-normal--12-120-75-75-p-67-iso8859-1"/>
+ <attr name="aggregation sign size" type="u16" val="18"/>
+ <attr name="generalization sign size" type="u16" val="16"/>
+</obj>
+
+</oks-data>
