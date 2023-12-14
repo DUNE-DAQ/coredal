@@ -217,6 +217,11 @@
   <attribute name="queue_type" description="Type of queue" type="enum" range="kUnknown,kStdDeQueue,kFollySPSCQueue,kFollyMPMCQueue" init-value="kFollySPSCQueue" is-not-null="yes"/>
  </class>
 
+ <class name="QueueWithGeoId">
+  <superclass name="Queue"/>
+  <relationship name="geo_id" class-type="GeoId" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="yes"/>
+ </class>
+
  <class name="RCApplication" description="An executable which allows users to control datataking">
   <superclass name="Application"/>
   <attribute name="application_name" type="string" init-value="controller" is-not-null="yes"/>
