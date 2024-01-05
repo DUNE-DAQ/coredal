@@ -101,8 +101,8 @@
 
  <class name="Connection" is-abstract="yes">
   <attribute name="data_type" description="String identifying the data that travel through this connection. This can be used to match up the endpoints of this connection." type="string" is-not-null="yes"/>
-  <attribute name="send_timeout_us" description="Timeout in us for sending on this connection" type="u32" init-value="1000" is-not-null="yes"/>
-  <attribute name="recv_timeout_us" description="Timeout in us for receiving on this connection" type="u32" init-value="1000" is-not-null="yes"/>
+  <attribute name="send_timeout_ms" description="Timeout in ms for sending on this connection" type="u32" init-value="1000" is-not-null="yes"/>
+  <attribute name="recv_timeout_ms" description="Timeout in ms for receiving on this connection" type="u32" init-value="1000" is-not-null="yes"/>
  </class>
 
  <class name="ConnectionService">
