@@ -101,6 +101,8 @@
 
  <class name="Connection" is-abstract="yes">
   <attribute name="data_type" description="String identifying the data that travel through this connection. This can be used to match up the endpoints of this connection." type="string" is-not-null="yes"/>
+  <attribute name="send_timeout_us" description="Timeout in us for sending on this connection" type="u32" init-value="1000" is-not-null="yes"/>
+  <attribute name="recv_timeout_us" description="Timeout in us for receiving on this connection" type="u32" init-value="1000" is-not-null="yes"/>
  </class>
 
  <class name="ConnectionService">
@@ -312,7 +314,20 @@
 
  <class name="StreamParameters">
   <attribute name="mode" type="enum" range="fix_rate,var_rate" init-value="fix_rate" is-not-null="yes"/>
- </class>
+  <relationship name="emulation_conf" description="Parameters for emulating the stream." class-type="StreamEmulationParameters" low-cc="zero" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
+  </class>
+
+<class name="StreamEmulationParameters">
+  <attribute name="data_file_name" type="string"/>
+  <attribute name="tp_data_file_name" type="string"/>
+  <attribute name="input_file_size_limit" type="u32" init-value="10485100" is-not-null="yes"/>
+  <attribute name="set_t0" type="bool" description="Set first timestamp to now" init-value="true" is-not-null="yes"/>
+  <attribute name="random_population_size" type="u32" init-value="10000" is-not-null="yes"/>
+  <attribute name="frame_error_rate_hz" type="float" init-value="0.0" is-not-null="yes"/>
+  <attribute name="generate_periodic_adc_pattern" type="bool" init-value="false" is-not-null="yes"/>
+  <attribute name="TP_rate_per_channel" description="TP rate per channel in units of 100 Hz." type="float" init-value="0.0" is-not-null="yes"/>
+  </class>
+
 
  <class name="Variable" description="A Variable associates a value with string name. It is used for process environment and database strings substitution.">
   <superclass name="VariableBase"/>
