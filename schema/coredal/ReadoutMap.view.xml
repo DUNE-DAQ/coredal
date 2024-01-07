@@ -63,7 +63,19 @@
 
 <oks-data>
 
-<info name="" type="" num-of-items="60" oks-format="data" oks-version="oks-08-03-04-11-g3f5bde7 built &quot;Feb 21 2023&quot;" created-by="glehmann" created-on="lxplus940.cern.ch" creation-time="20231212T153805" last-modified-by="glehmann" last-modified-on="lxplus940.cern.ch" last-modification-time="20231212T153805"/>
+<info name="" type="" num-of-items="72" oks-format="data" oks-version="oks-08-03-04-11-g3f5bde7 built &quot;Feb 21 2023&quot;" created-by="glehmann" created-on="lxplus928.cern.ch" creation-time="20240107T162425" last-modified-by="glehmann" last-modified-on="lxplus928.cern.ch" last-modification-time="20240107T162425"/>
+
+<obj class="ALink" id="DROStreamConf-2-GeoId-via-geo_id">
+ <attr name="Name" type="string" val="geo_id"/>
+ <rel name="From" class="Class" id="DROStreamConf"/>
+ <rel name="To" class="Class" id="GeoId"/>
+ <rel name="Points">
+  <ref class="Point" id="1 DROStreamConf-2-GeoId-via-geo_id"/>
+  <ref class="Point" id="2 DROStreamConf-2-GeoId-via-geo_id"/>
+  <ref class="Point" id="3 DROStreamConf-2-GeoId-via-geo_id"/>
+  <ref class="Point" id="4 DROStreamConf-2-GeoId-via-geo_id"/>
+ </rel>
+</obj>
 
 <obj class="ALink" id="DROStreamConf-2-StreamParameters-via-stream_params">
  <attr name="Name" type="string" val="stream_params"/>
@@ -125,49 +137,71 @@
  </rel>
 </obj>
 
+<obj class="ALink" id="StreamParameters-2-StreamEmulationParameters-via-emulation_conf">
+ <attr name="Name" type="string" val="emulation_conf"/>
+ <rel name="From" class="Class" id="StreamParameters"/>
+ <rel name="To" class="Class" id="StreamEmulationParameters"/>
+ <rel name="Points">
+  <ref class="Point" id="1 StreamParameters-2-StreamEmulationParameters-via-emulation_conf"/>
+  <ref class="Point" id="2 StreamParameters-2-StreamEmulationParameters-via-emulation_conf"/>
+  <ref class="Point" id="3 StreamParameters-2-StreamEmulationParameters-via-emulation_conf"/>
+  <ref class="Point" id="4 StreamParameters-2-StreamEmulationParameters-via-emulation_conf"/>
+ </rel>
+</obj>
+
 <obj class="Class" id="DROStreamConf">
- <attr name="x" type="s16" val="930"/>
- <attr name="y" type="s16" val="54"/>
+ <attr name="x" type="s16" val="692"/>
+ <attr name="y" type="s16" val="218"/>
+</obj>
+
+<obj class="Class" id="GeoId">
+ <attr name="x" type="s16" val="881"/>
+ <attr name="y" type="s16" val="217"/>
 </obj>
 
 <obj class="Class" id="ReadoutGroup">
- <attr name="x" type="s16" val="659"/>
- <attr name="y" type="s16" val="324"/>
+ <attr name="x" type="s16" val="698"/>
+ <attr name="y" type="s16" val="92"/>
 </obj>
 
 <obj class="Class" id="ReadoutInterface">
- <attr name="x" type="s16" val="935"/>
- <attr name="y" type="s16" val="364"/>
+ <attr name="x" type="s16" val="688"/>
+ <attr name="y" type="s16" val="146"/>
 </obj>
 
 <obj class="Class" id="ReadoutMap">
- <attr name="x" type="s16" val="573"/>
- <attr name="y" type="s16" val="180"/>
+ <attr name="x" type="s16" val="548"/>
+ <attr name="y" type="s16" val="11"/>
 </obj>
 
 <obj class="Class" id="ResourceBase">
- <attr name="x" type="s16" val="770"/>
- <attr name="y" type="s16" val="110"/>
+ <attr name="x" type="s16" val="434"/>
+ <attr name="y" type="s16" val="230"/>
 </obj>
 
 <obj class="Class" id="ResourceSet">
- <attr name="x" type="s16" val="873"/>
- <attr name="y" type="s16" val="171"/>
+ <attr name="x" type="s16" val="487"/>
+ <attr name="y" type="s16" val="162"/>
 </obj>
 
 <obj class="Class" id="ResourceSetAND">
- <attr name="x" type="s16" val="778"/>
- <attr name="y" type="s16" val="255"/>
+ <attr name="x" type="s16" val="515"/>
+ <attr name="y" type="s16" val="92"/>
 </obj>
 
 <obj class="Class" id="Session">
- <attr name="x" type="s16" val="88"/>
- <attr name="y" type="s16" val="83"/>
+ <attr name="x" type="s16" val="13"/>
+ <attr name="y" type="s16" val="9"/>
+</obj>
+
+<obj class="Class" id="StreamEmulationParameters">
+ <attr name="x" type="s16" val="257"/>
+ <attr name="y" type="s16" val="283"/>
 </obj>
 
 <obj class="Class" id="StreamParameters">
- <attr name="x" type="s16" val="1136"/>
- <attr name="y" type="s16" val="49"/>
+ <attr name="x" type="s16" val="664"/>
+ <attr name="y" type="s16" val="308"/>
 </obj>
 
 <obj class="GLink" id="ResourceBase-2-DROStreamConf">
@@ -225,6 +259,11 @@
  </rel>
 </obj>
 
+<obj class="Point" id="1 DROStreamConf-2-GeoId-via-geo_id">
+ <attr name="x" type="s16" val="75"/>
+ <attr name="y" type="s16" val="38"/>
+</obj>
+
 <obj class="Point" id="1 DROStreamConf-2-StreamParameters-via-stream_params">
  <attr name="x" type="s16" val="75"/>
  <attr name="y" type="s16" val="38"/>
@@ -246,7 +285,7 @@
 </obj>
 
 <obj class="Point" id="1 ResourceSet-2-ResourceBase-via-contains">
- <attr name="x" type="s16" val="60"/>
+ <attr name="x" type="s16" val="36"/>
  <attr name="y" type="s16" val="24"/>
 </obj>
 
@@ -275,104 +314,133 @@
  <attr name="y" type="s16" val="146"/>
 </obj>
 
+<obj class="Point" id="1 StreamParameters-2-StreamEmulationParameters-via-emulation_conf">
+ <attr name="x" type="s16" val="39"/>
+ <attr name="y" type="s16" val="38"/>
+</obj>
+
+<obj class="Point" id="2 DROStreamConf-2-GeoId-via-geo_id">
+ <attr name="x" type="s16" val="75"/>
+ <attr name="y" type="s16" val="228"/>
+</obj>
+
 <obj class="Point" id="2 DROStreamConf-2-StreamParameters-via-stream_params">
  <attr name="x" type="s16" val="75"/>
- <attr name="y" type="s16" val="60"/>
+ <attr name="y" type="s16" val="311"/>
 </obj>
 
 <obj class="Point" id="2 ReadoutMap-2-ReadoutGroup-via-groups">
  <attr name="x" type="s16" val="60"/>
- <attr name="y" type="s16" val="339"/>
+ <attr name="y" type="s16" val="25"/>
 </obj>
 
 <obj class="Point" id="2 ResourceBase-2-DROStreamConf">
  <attr name="x" type="s16" val="68"/>
- <attr name="y" type="s16" val="68"/>
+ <attr name="y" type="s16" val="248"/>
 </obj>
 
 <obj class="Point" id="2 ResourceBase-2-ResourceSet">
  <attr name="x" type="s16" val="68"/>
- <attr name="y" type="s16" val="126"/>
+ <attr name="y" type="s16" val="170"/>
 </obj>
 
 <obj class="Point" id="2 ResourceSet-2-ResourceBase-via-contains">
- <attr name="x" type="s16" val="60"/>
- <attr name="y" type="s16" val="185"/>
+ <attr name="x" type="s16" val="36"/>
+ <attr name="y" type="s16" val="177"/>
 </obj>
 
 <obj class="Point" id="2 ResourceSet-2-ResourceSetAND">
  <attr name="x" type="s16" val="60"/>
- <attr name="y" type="s16" val="227"/>
+ <attr name="y" type="s16" val="105"/>
 </obj>
 
 <obj class="Point" id="2 ResourceSetAND-2-ReadoutGroup">
  <attr name="x" type="s16" val="81"/>
- <attr name="y" type="s16" val="264"/>
+ <attr name="y" type="s16" val="106"/>
 </obj>
 
 <obj class="Point" id="2 ResourceSetAND-2-ReadoutInterface">
  <attr name="x" type="s16" val="81"/>
- <attr name="y" type="s16" val="264"/>
+ <attr name="y" type="s16" val="194"/>
 </obj>
 
 <obj class="Point" id="2 Session-2-ReadoutMap-via-readout_map">
  <attr name="x" type="s16" val="204"/>
- <attr name="y" type="s16" val="131"/>
+ <attr name="y" type="s16" val="26"/>
 </obj>
 
 <obj class="Point" id="2 Session-2-ResourceBase-via-disabled">
  <attr name="x" type="s16" val="204"/>
- <attr name="y" type="s16" val="96"/>
+ <attr name="y" type="s16" val="242"/>
+</obj>
+
+<obj class="Point" id="2 StreamParameters-2-StreamEmulationParameters-via-emulation_conf">
+ <attr name="x" type="s16" val="39"/>
+ <attr name="y" type="s16" val="334"/>
+</obj>
+
+<obj class="Point" id="3 DROStreamConf-2-GeoId-via-geo_id">
+ <attr name="x" type="s16" val="25"/>
+ <attr name="y" type="s16" val="228"/>
 </obj>
 
 <obj class="Point" id="3 DROStreamConf-2-StreamParameters-via-stream_params">
  <attr name="x" type="s16" val="34"/>
- <attr name="y" type="s16" val="60"/>
+ <attr name="y" type="s16" val="311"/>
 </obj>
 
 <obj class="Point" id="3 ReadoutMap-2-ReadoutGroup-via-groups">
  <attr name="x" type="s16" val="22"/>
- <attr name="y" type="s16" val="339"/>
+ <attr name="y" type="s16" val="25"/>
 </obj>
 
 <obj class="Point" id="3 ResourceBase-2-DROStreamConf">
  <attr name="x" type="s16" val="25"/>
- <attr name="y" type="s16" val="68"/>
+ <attr name="y" type="s16" val="248"/>
 </obj>
 
 <obj class="Point" id="3 ResourceBase-2-ResourceSet">
  <attr name="x" type="s16" val="20"/>
- <attr name="y" type="s16" val="126"/>
+ <attr name="y" type="s16" val="170"/>
 </obj>
 
 <obj class="Point" id="3 ResourceSet-2-ResourceBase-via-contains">
- <attr name="x" type="s16" val="22"/>
- <attr name="y" type="s16" val="185"/>
+ <attr name="x" type="s16" val="25"/>
+ <attr name="y" type="s16" val="177"/>
 </obj>
 
 <obj class="Point" id="3 ResourceSet-2-ResourceSetAND">
  <attr name="x" type="s16" val="27"/>
- <attr name="y" type="s16" val="227"/>
+ <attr name="y" type="s16" val="105"/>
 </obj>
 
 <obj class="Point" id="3 ResourceSetAND-2-ReadoutGroup">
  <attr name="x" type="s16" val="22"/>
- <attr name="y" type="s16" val="264"/>
+ <attr name="y" type="s16" val="106"/>
 </obj>
 
 <obj class="Point" id="3 ResourceSetAND-2-ReadoutInterface">
  <attr name="x" type="s16" val="26"/>
- <attr name="y" type="s16" val="264"/>
+ <attr name="y" type="s16" val="194"/>
 </obj>
 
 <obj class="Point" id="3 Session-2-ReadoutMap-via-readout_map">
  <attr name="x" type="s16" val="20"/>
- <attr name="y" type="s16" val="131"/>
+ <attr name="y" type="s16" val="26"/>
 </obj>
 
 <obj class="Point" id="3 Session-2-ResourceBase-via-disabled">
- <attr name="x" type="s16" val="22"/>
- <attr name="y" type="s16" val="96"/>
+ <attr name="y" type="s16" val="242"/>
+</obj>
+
+<obj class="Point" id="3 StreamParameters-2-StreamEmulationParameters-via-emulation_conf">
+ <attr name="x" type="s16" val="65"/>
+ <attr name="y" type="s16" val="334"/>
+</obj>
+
+<obj class="Point" id="4 DROStreamConf-2-GeoId-via-geo_id">
+ <attr name="x" type="s16" val="25"/>
+ <attr name="y" type="s16" val="26"/>
 </obj>
 
 <obj class="Point" id="4 DROStreamConf-2-StreamParameters-via-stream_params">
@@ -396,7 +464,7 @@
 </obj>
 
 <obj class="Point" id="4 ResourceSet-2-ResourceBase-via-contains">
- <attr name="x" type="s16" val="22"/>
+ <attr name="x" type="s16" val="25"/>
  <attr name="y" type="s16" val="8"/>
 </obj>
 
@@ -421,8 +489,12 @@
 </obj>
 
 <obj class="Point" id="4 Session-2-ResourceBase-via-disabled">
- <attr name="x" type="s16" val="22"/>
  <attr name="y" type="s16" val="8"/>
+</obj>
+
+<obj class="Point" id="4 StreamParameters-2-StreamEmulationParameters-via-emulation_conf">
+ <attr name="x" type="s16" val="65"/>
+ <attr name="y" type="s16" val="44"/>
 </obj>
 
 <obj class="View" id="Unknown">
