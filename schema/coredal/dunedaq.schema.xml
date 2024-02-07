@@ -80,7 +80,7 @@
 
 <oks-schema>
 
-<info name="" type="" num-of-items="41" oks-format="schema" oks-version="oks-08-03-04-11-g3f5bde7 built &quot;Feb 21 2023&quot;" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="glehmann" last-modified-on="lxplus940.cern.ch" last-modification-time="20231212T154733"/>
+<info name="" type="" num-of-items="42" oks-format="schema" oks-version="862f2957270" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="eflumerf" last-modified-on="ironvirt9.mshome.net" last-modification-time="20240207T101454"/>
 
  <class name="Application" description="A software executable" is-abstract="yes">
   <attribute name="application_name" description="Name of the application binary to run." type="string" is-not-null="yes"/>
@@ -174,7 +174,7 @@
   <attribute name="mandatory" type="string" is-multi-value="yes"/>
  </class>
 
- <class name="GeoId">
+ <class name="GeoId" description="The location of a stream, in detector geographical coordinates.">
   <attribute name="detector_id" type="u32" is-not-null="yes"/>
   <attribute name="crate_id" type="u32" is-not-null="yes"/>
   <attribute name="slot_id" type="u32" is-not-null="yes"/>
@@ -314,7 +314,7 @@
 
  <class name="StreamParameters">
   <attribute name="mode" type="enum" range="fix_rate,var_rate" init-value="fix_rate" is-not-null="yes"/>
-  </class>
+ </class>
 
  <class name="Variable" description="A Variable associates a value with string name. It is used for process environment and database strings substitution.">
   <superclass name="VariableBase"/>
