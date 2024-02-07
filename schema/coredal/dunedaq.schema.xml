@@ -112,7 +112,7 @@
 
  <class name="DROStreamConf">
   <superclass name="ResourceBase"/>
-  <attribute name="src_id" type="u32" is-not-null="yes"/>
+  <attribute name="source_id" type="u32" is-not-null="yes"/>
   <relationship name="geo_id" class-type="GeoId" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
   <relationship name="stream_params" class-type="StreamParameters" low-cc="one" high-cc="one" is-composite="no" is-exclusive="no" is-dependent="no"/>
  </class>
@@ -221,7 +221,7 @@
 
  <class name="QueueWithId">
   <superclass name="Queue"/>
-  <attribute name="id" type="u32" init-value="0" is-not-null="yes"/>
+  <attribute name="source_id" type="u32" init-value="0" is-not-null="yes"/>
  </class>
 
  <class name="RCApplication" description="An executable which allows users to control datataking">
