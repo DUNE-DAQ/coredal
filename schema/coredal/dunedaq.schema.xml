@@ -103,6 +103,9 @@
   <attribute name="data_type" description="String identifying the data that travel through this connection. This can be used to match up the endpoints of this connection." type="string" is-not-null="yes"/>
   <attribute name="send_timeout_ms" description="Timeout in ms for sending on this connection" type="u32" init-value="1000" is-not-null="yes"/>
   <attribute name="recv_timeout_ms" description="Timeout in ms for receiving on this connection" type="u32" init-value="1000" is-not-null="yes"/>
+  <method name="get_xxx" description="xxx">
+   <method-implementation language="c++" prototype="virtual bool get_xxx() const" body="return true;"/>
+  </method>
  </class>
 
  <class name="ConnectionService">
@@ -189,6 +192,9 @@
   <superclass name="Connection"/>
   <attribute name="connection_type" description="Type of the network connection " type="enum" range="kSendRecv,kPubSub" init-value="kSendRecv" is-not-null="yes"/>
   <relationship name="associated_service" description="Service provided by this connection" class-type="Service" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
+  <method name="get_xxx" description="xxx">
+   <method-implementation language="c++" prototype="virtual bool get_xxx() const override" body="return false;"/>
+  </method>
  </class>
 
  <class name="NetworkDevice">
@@ -217,6 +223,9 @@
   <superclass name="Connection"/>
   <attribute name="capacity" type="u32" init-value="10" is-not-null="yes"/>
   <attribute name="queue_type" description="Type of queue" type="enum" range="kUnknown,kStdDeQueue,kFollySPSCQueue,kFollyMPMCQueue" init-value="kFollySPSCQueue" is-not-null="yes"/>
+  <method name="get_xxx" description="xxx">
+   <method-implementation language="c++" prototype="virtual bool get_xxx() const override" body="return false;"/>
+  </method>
  </class>
 
  <class name="QueueWithId">
