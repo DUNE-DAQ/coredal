@@ -5,6 +5,7 @@
 
 #include "oksdbinterfaces/Configuration.hpp"
 #include "oksdbinterfaces/DalObject.hpp"
+#include "nlohmann/json.hpp"
 
 
 namespace dunedaq {
@@ -40,7 +41,21 @@ namespace coredal {
 
   const dunedaq::coredal::Session * get_session(dunedaq::oksdbinterfaces::Configuration& conf, const std::string& name, unsigned long rlevel = 10, const std::vector<std::string> * rclasses = nullptr);
 
-
+  template <typename T> void add_json_value(oksdbinterfaces::ConfigObject& obj,
+                                            std::string& name,
+                                            bool multi_value,
+                                            nlohmann::json& attributes) {
+    if (!multi_value) {
+      T value;
+      obj.get(name, value);
+      attributes[name] = value;
+    }
+    else {
+      std::vector<T> value_vector;
+      obj.get(name, value_vector);
+      attributes[name] = nlohmann::json(value_vector);
+    }
+  }
 } // namespace coredal
 
 
