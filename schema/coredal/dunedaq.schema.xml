@@ -80,7 +80,7 @@
 
 <oks-schema>
 
-<info name="" type="" num-of-items="42" oks-format="schema" oks-version="862f2957270" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="eflumerf" last-modified-on="ironvirt9.mshome.net" last-modification-time="20240207T101454"/>
+<info name="" type="" num-of-items="43" oks-format="schema" oks-version="cf3a4f0 built &quot;Aug 18 2023&quot;" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="21d162e26c87" last-modification-time="20240212T103039"/>
 
  <class name="Application" description="A software executable" is-abstract="yes">
   <attribute name="application_name" description="Name of the application binary to run." type="string" is-not-null="yes"/>
@@ -183,6 +183,12 @@
 
  <class name="HostComponent" is-abstract="yes">
   <attribute name="numa_id" type="u8" init-value="0" is-not-null="yes"/>
+ </class>
+
+ <class name="Jsonable">
+  <method name="to_json" description="">
+   <method-implementation language="c++" prototype="nlohmann::json to_json(bool diect=false) const" body="BEGIN_HEADER_PROLOGUE&#xA;#include &quot;nlohmann/json.hpp&quot;&#xA;END_HEADER_PROLOGUE"/>
+  </method>
  </class>
 
  <class name="NetworkConnection">

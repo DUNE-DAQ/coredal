@@ -11,7 +11,7 @@ find_package(genconfig REQUIRED)
 find_package(ers REQUIRED)
 find_package(logging REQUIRED)
 find_package(oksdbinterfaces REQUIRED)
-
+find_package(nlohmann_json REQUIRED)
 
 #find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
@@ -22,7 +22,7 @@ daq_oks_codegen(dunedaq.schema.xml)
 daq_add_library(dalMethods.cpp
   test_circular_dependency.cpp disabled-components.cpp
   LINK_LIBRARIES oksdbinterfaces::oksdbinterfaces okssystem::okssystem
-  logging::logging)
+  logging::logging nlohmann_json::nlohmann_json)
 
 
 daq_add_application(listApps list_apps.cxx
