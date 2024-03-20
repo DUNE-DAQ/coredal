@@ -84,7 +84,7 @@
 
  <class name="Application" description="A software executable" is-abstract="yes">
   <attribute name="application_name" description="Name of the application binary to run." type="string" is-not-null="yes"/>
-  <attribute name="commandline_parameters" description="command line parameters to add when starting the application" type="string"/>
+  <attribute name="commandline_parameters" description="command line parameters to add when starting the application" is-multi-value="yes" type="string"/>
   <relationship name="applicationEnvironment" description="Define process environment for this application." class-type="VariableBase" low-cc="zero" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
   <relationship name="runs_on" description="VirtualHost to run this application on" class-type="VirtualHost" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
   <relationship name="exposes_service" description="Services exposed i.e. provided by this application" class-type="Service" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
@@ -234,10 +234,10 @@
   <superclass name="Application"/>
   <attribute name="application_name" type="string" init-value="controller" is-not-null="yes"/>
   <relationship name="fsm" class-type="FSMconfiguration" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
-  <relationship name="broadcaster" class-type="RCBroadcatser" low-cc="zero" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="no"/>
+  <relationship name="broadcaster" class-type="RCBroadcaster" low-cc="zero" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="no"/>
  </class>
 
- <class name="RCBroadcatser">
+ <class name="RCBroadcaster">
   <attribute name="type" type="enum" range="kafka,undefined" init-value="kafka" is-not-null="yes"/>
   <attribute name="address" type="string" init-value="monkafka.cern.ch:30092"/>
   <attribute name="publish_timeout" type="u32" init-value="2" is-not-null="yes"/>
