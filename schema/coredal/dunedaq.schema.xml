@@ -80,11 +80,24 @@
 
 <oks-schema>
 
-<info name="" type="" num-of-items="43" oks-format="schema" oks-version="cf3a4f0 built &quot;Aug 18 2023&quot;" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="gjc" last-modified-on="21d162e26c87" last-modification-time="20240212T103039"/>
+<info name="" type="" num-of-items="46" oks-format="schema" oks-version="862f2957270" created-by="jcfree" created-on="mu2edaq13.fnal.gov" creation-time="20230123T223700" last-modified-by="eflumerf" last-modified-on="ironvirt9.mshome.net" last-modification-time="20240326T183809"/>
+
+ <class name="Action">
+  <attribute name="method_name" type="string" is-not-null="yes"/>
+   <attribute name="module" type="string" is-not-null="no"/>
+ </class>
+
+ <class name="ActionPlan" description="A set of parallel steps for an application to carry out a command">
+  <relationship name="steps" class-type="ActionStep" low-cc="zero" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
+ </class>
+
+ <class name="ActionStep">
+  <relationship name="actions" class-type="Action" low-cc="one" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
+ </class>
 
  <class name="Application" description="A software executable" is-abstract="yes">
   <attribute name="application_name" description="Name of the application binary to run." type="string" is-not-null="yes"/>
-  <attribute name="commandline_parameters" description="command line parameters to add when starting the application" is-multi-value="yes" type="string"/>
+  <attribute name="commandline_parameters" description="command line parameters to add when starting the application" type="string" is-multi-value="yes"/>
   <relationship name="applicationEnvironment" description="Define process environment for this application." class-type="VariableBase" low-cc="zero" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
   <relationship name="runs_on" description="VirtualHost to run this application on" class-type="VirtualHost" low-cc="one" high-cc="one" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
   <relationship name="exposes_service" description="Services exposed i.e. provided by this application" class-type="Service" low-cc="zero" high-cc="many" is-composite="yes" is-exclusive="no" is-dependent="yes"/>
@@ -121,6 +134,7 @@
   <superclass name="Application"/>
   <attribute name="application_name" description="Name of the application binary to run." type="string" init-value="daq_application" is-not-null="yes"/>
   <relationship name="modules" class-type="DaqModule" low-cc="zero" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
+  <relationship name="action_plans" class-type="ActionPlan" low-cc="zero" high-cc="many" is-composite="no" is-exclusive="no" is-dependent="no"/>
   <method name="get_used_hostresources" description="Get the set of all HostComponents used by this application">
    <method-implementation language="c++" prototype=" std::set&lt;const dunedaq::coredal::HostComponent*&gt; get_used_hostresources() const" body=""/>
   </method>
